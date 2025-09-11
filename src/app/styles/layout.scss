@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import "./variables";
+@import "./reset";
+
+body {
+  font-family: "Press Start 2P", cursive;
+  background-color: $dark-main;
+  color: $pink-accent;
+  padding: 18px 36px;
+}

@@ -1,0 +1,44 @@
+.stars {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  overflow: hidden;
+  z-index: -1;
+
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+
+  .layer1 {
+    // Closest layer - brighter, smaller stars
+    box-shadow: 0 0 6px #fff, 0 0 12px rgba(255, 255, 255, 0.5);
+    animation-delay: 0s;
+  }
+
+  .layer2 {
+    // Middle layer - medium brightness
+    box-shadow: 0 0 4px #fff, 0 0 8px rgba(255, 255, 255, 0.3);
+    animation-delay: 1s;
+  }
+
+  .layer3 {
+    // Farthest layer - dimmer, larger stars
+    box-shadow: 0 0 2px #fff, 0 0 4px rgba(255, 255, 255, 0.2);
+    animation-delay: 2s;
+  }
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+}

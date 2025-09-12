@@ -1,0 +1,79 @@
+@import "../../styles/variables";
+
+.MainInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  justify-content: center;
+  gap: 60px;
+  color: $white;
+
+  &__part {
+    min-height: 300px;
+  }
+
+  &__basicInfo {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 42px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  &__soon {
+    font-size: 42px;
+    text-shadow: 0 0 2px $pink-accent, 0 0 5px $pink-accent;
+  }
+
+  &__divider {
+    width: 25%;
+    height: 3px;
+    background-color: $border-pink;
+  }
+
+  &__nominations {
+    padding-top: 30px;
+  }
+
+  &__nominationsTitle {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 42px;
+    text-shadow: 0 0 2px $pink-accent, 0 0 5px $pink-accent;
+  }
+
+  &__nominationsList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 650px;
+    gap: 60px;
+  }
+
+  &__nomination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    width: 275px
+  }
+
+  &__nominationTitle {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+}

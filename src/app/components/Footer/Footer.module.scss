@@ -1,0 +1,12 @@
+@import "../../styles/variables";
+
+.Footer {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: $pink-accent;
+  text-align: center;
+  margin-top: 42px;
+  border: 3.5px solid $border-pink;
+  border-radius: $radius;
+  padding: 14px 24px;
+}

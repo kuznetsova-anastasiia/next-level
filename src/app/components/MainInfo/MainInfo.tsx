@@ -36,15 +36,16 @@ export default function MainInfo() {
             <p>MIDDLE: 1🏆 2🏆 3🏆</p>
             <p>NEW: 1🏆 2🏆 3🏆</p>
           </div>
-          <div className={styles.MainInfo__nomination}>
-            <h3 className={styles.MainInfo__nominationTitle}>Соло+</h3>
-            <p>1🏆 2🏆 3🏆</p>
-          </div>
+          
           <div className={styles.MainInfo__nomination}>
             <h3 className={styles.MainInfo__nominationTitle}>Неформат</h3>
             <p>Team: 1🏆 2🏆 3🏆</p>
             <p>Duo: 1🏆 2🏆 3🏆</p>
             <p>Solo: 1🏆 2🏆 3🏆</p>
+          </div>
+          <div className={styles.MainInfo__nomination}>
+            <h3 className={styles.MainInfo__nominationTitle}>Соло+</h3>
+            <p>1🏆 2🏆 3🏆</p>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ export default function Poster() {
           BESTies Party
         </h1>
 
-        <p className={styles.Poster__idm}>with. <img src="/images/idm.PNG" alt="IDM" /></p>
+        <p className={styles.Poster__idm}>with <img src="/images/idm.PNG" alt="IDM" /></p>
         <Countdown />
 
         <div className={styles.Poster__buttons}>

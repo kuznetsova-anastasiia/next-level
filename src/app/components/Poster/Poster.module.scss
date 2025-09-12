@@ -86,40 +86,21 @@
     display: flex;
     align-items: center;
     position: absolute;
-    top: 29%;
+    top: 31%;
     left: 46%;
     z-index: 3;
-    text-shadow: 5px 4px 5px $dark-main;
+    text-shadow: 2px 2px 4px $dark-main, 0 0 2px $pink-accent, 0 0 5px $pink-accent;
+
     // transform: rotate(-14deg);
-    color: $dark-main;
+    // color: $dark-main;
     font-size: 18px;
     font-weight: 600;
 
 
     img {
-      width: 90px;
-      height: 90px;
-      filter: drop-shadow(5px 6px 5px $dark-main);
-    }
-  }
-
-  &__button-player {
-    transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
-
-    &:hover {
-      transform: scale(1.1);
-      color: red;
-      background-color: rgba(255, 0, 0, 0.351);
-      border-color: rgba(255, 0, 0, 0.351);
-    }
-  }
-
-  &__button-watcher {
-    &:hover {
-      transform: scale(1.1);
-      color: blue;
-      background-color: rgba(0, 0, 255, 0.351);
-      border-color: rgba(0, 0, 255, 0.351);
+      width: 70px;
+      height: 50px;
+      filter: drop-shadow(2px 2px 4px $pink-accent);
     }
   }
 }

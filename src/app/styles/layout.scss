@@ -3,13 +3,14 @@
 @import "./reset";
 
 body {
-  // font-family: "Press Start 2P", cursive;
+  font-family: var(--font-press-start);
   background-color: $dark-main;
   color: $pink-accent;
   margin: 0;
 }
 
 .layout-container {
+  font-family: var(--font-press-start);
   display: flex;
   flex-direction: column;
   min-height: 100vh;

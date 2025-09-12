@@ -21,19 +21,19 @@ export default function MainInfo() {
           <div className={styles.MainInfo__nomination}>
             <h3 className={styles.MainInfo__nominationTitle}>Команди</h3>
             <p>PRO: 1🏆 2🏆 3🏆</p>
-            <p>MIDL: 1🏆 2🏆 3🏆</p>
+            <p>MIDDLE: 1🏆 2🏆 3🏆</p>
             <p>NEW: 1🏆 2🏆 3🏆</p>
           </div>
           <div className={styles.MainInfo__nomination}>
             <h3 className={styles.MainInfo__nominationTitle}>Соло</h3>
             <p>PRO: 1🏆 2🏆 3🏆</p>
-            <p>MIDL: 1🏆 2🏆 3🏆</p>
+            <p>MIDDLE: 1🏆 2🏆 3🏆</p>
             <p>NEW: 1🏆 2🏆 3🏆</p>
           </div>
           <div className={styles.MainInfo__nomination}>
             <h3 className={styles.MainInfo__nominationTitle}>Дуети</h3>
             <p>PRO: 1🏆 2🏆 3🏆</p>
-            <p>MIDL: 1🏆 2🏆 3🏆</p>
+            <p>MIDDLE: 1🏆 2🏆 3🏆</p>
             <p>NEW: 1🏆 2🏆 3🏆</p>
           </div>
           <div className={styles.MainInfo__nomination}>

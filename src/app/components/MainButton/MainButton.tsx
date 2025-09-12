@@ -4,9 +4,10 @@ import styles from "./MainButton.module.scss";
 type MainButtonProps = {
   text: string;
   color?: string;
+  type?: 'player' | 'watcher';
 }
 
-export default function MainButton({ text, color }: MainButtonProps) {
+export default function MainButton({ text, color, type }: MainButtonProps) {
   const handlePlay = () => {
     console.log("Play");
   }
@@ -14,5 +15,5 @@ export default function MainButton({ text, color }: MainButtonProps) {
   const handleWatch = () => {
     console.log("Watch");
   }
-  return <button className={styles.MainButton} onClick={text === "Play" ? handlePlay : handleWatch}>{text}</button>;
+  return <button className={`${styles.MainButton} ${type === 'player' ? styles.MainButton__player : styles.MainButton__watcher}`} onClick={type === "player" ? handlePlay : handleWatch}>{text}</button>;
 }

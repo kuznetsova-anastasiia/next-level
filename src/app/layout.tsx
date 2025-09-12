@@ -3,12 +3,18 @@ import "./styles/layout.scss";
 import Navbar from "./components/Navbar";
 import Stars from "./components/Stars";
 import Footer from "./components/Footer";
-import { Press_Start_2P } from "next/font/google";
+import { Press_Start_2P, Tektur } from "next/font/google";
 
 const pressStart = Press_Start_2P({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-press-start",
+});
+
+const tektur = Tektur({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-tektur",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={pressStart.className}>
+      <body className={`${tektur.variable} ${pressStart.variable}`}>
         <div className="layout-container">
           <Stars />
           <Navbar />

@@ -5,8 +5,10 @@
   justify-content: center;
   gap: 6px;
   color: $pink-accent;
-  font-size: 42px;
-  text-shadow: 0 0 2px $pink-accent, 0 0 5px $pink-accent;
+  font-size: 54px;
+  font-weight: 500;
+  text-shadow: 1.5px 1.5px 4px $dark-main, 0 0 2px $pink-accent, 0 0 5px $pink-accent;
+  font-family: var(--font-tektur);
 
   &__unit {
     display: flex;

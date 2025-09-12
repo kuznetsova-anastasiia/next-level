@@ -2,7 +2,7 @@
 
 .MainButton {
   text-transform: uppercase;
-  padding: 12px 24px;
+  padding: 12px 36px;
   border: 3px solid $pink-accent;
   color: $pink-accent;
   border-radius: $radius;
@@ -10,11 +10,45 @@
   // font-family: "Press Start 2P", cursive;
   font-family: var(--font-press-start);
   font-size: 24px;
+  font-weight: 500;
   text-shadow: 0 0 2px $pink-accent, 0 0 5px $pink-accent;
   box-shadow: 0 0 2px $pink-accent, 0 0 5px $pink-accent;
 
   &:hover {
     background-color: $border-pink;
     color: $white;
+  }
+
+  &__player {
+    transition: transform 0.7s ease, color 0.3s ease, background-color 0.3s ease;
+    box-shadow: 1.5px 1.5px 4px $dark-main, 0 0 2px $pink-accent, 0 0 5px $pink-accent;
+    text-shadow: 1.5px 1.5px 4px $dark-main, 0 0 2px $pink-accent, 0 0 5px $pink-accent;
+    color: red;
+      background-color: rgba(255, 0, 0, 0.351);
+      border-color: rgba(255, 0, 0, 0.351);
+
+
+    &:hover {
+      transform: scale(1.2);
+      color: red;
+      background-color: rgba(255, 0, 0, 0.351);
+      border-color: rgba(255, 0, 0, 0.351);
+    }
+  }
+
+  &__watcher {
+    transition: transform 0.7s ease, color 0.3s ease, background-color 0.3s ease;
+    box-shadow: 1.5px 1.5px 4px $dark-main, 0 0 2px $pink-accent, 0 0 5px $pink-accent;
+    text-shadow: 1.5px 1.5px 4px $dark-main, 0 0 2px $pink-accent, 0 0 5px $pink-accent;
+    color: blue;
+      background-color: rgba(0, 0, 255, 0.351);
+      border-color: rgba(0, 0, 255, 0.351);
+
+    &:hover {
+      transform: scale(1.2);
+      color: blue;
+      background-color: rgba(0, 0, 255, 0.351);
+      border-color: rgba(0, 0, 255, 0.351);
+    }
   }
 }

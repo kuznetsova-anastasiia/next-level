@@ -7,7 +7,8 @@
   color: $pink-accent;
   border-radius: $radius;
   transition: background-color 0.3s ease, color 0.3s ease;
-  font-family: "Press Start 2P", cursive;
+  // font-family: "Press Start 2P", cursive;
+  font-family: var(--font-press-start);
   font-size: 24px;
   text-shadow: 0 0 2px $pink-accent, 0 0 5px $pink-accent;
   box-shadow: 0 0 2px $pink-accent, 0 0 5px $pink-accent;

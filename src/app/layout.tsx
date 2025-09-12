@@ -3,6 +3,13 @@ import "./styles/layout.scss";
 import Navbar from "./components/Navbar";
 import Stars from "./components/Stars";
 import Footer from "./components/Footer";
+import { Press_Start_2P } from "next/font/google";
+
+const pressStart = Press_Start_2P({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-press-start",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={pressStart.className}>
         <div className="layout-container">
           <Stars />
           <Navbar />

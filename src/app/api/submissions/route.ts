@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
       songName,
       songMinutes,
       songSeconds,
-      googleDriveLink,
+      youtubeLink,
       hasBackdancers,
       participants,
       participantSubmissionNumbers,
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
       !phoneNumber ||
       !category ||
       !songName ||
-      !googleDriveLink ||
+      !youtubeLink ||
       !userId
     ) {
       return NextResponse.json(
@@ -57,13 +57,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid category" }, { status: 400 });
     }
 
-    // Validate Google Drive link format
-    const googleDriveRegex = /^https:\/\/drive\.google\.com\/.+/;
-    if (!googleDriveRegex.test(googleDriveLink)) {
+    // Validate YouTube link format
+    const youtubeRegex = /^https:\/\/(www\.)?youtube\.com\/watch\?v=.+/;
+    if (!youtubeRegex.test(youtubeLink)) {
       return NextResponse.json(
         {
           error:
-            "Посилання має бути у форматі Google Drive (https://drive.google.com/...)",
+            "Посилання має бути у форматі YouTube (https://www.youtube.com/watch?v=...)",
         },
         { status: 400 }
       );
@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
         songName,
         songMinutes: parseInt(songMinutes),
         songSeconds: parseInt(songSeconds),
-        googleDriveLink,
+        youtubeLink,
         hasBackdancers: hasBackdancers || false,
         participants: participants || [],
         participantSubmissionNumbers: participantSubmissionNumbers || [],

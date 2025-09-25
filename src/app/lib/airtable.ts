@@ -44,7 +44,7 @@ interface SubmissionData {
   songName: string;
   songMinutes: number;
   songSeconds: number;
-  googleDriveLink: string;
+  youtubeLink: string;
   hasBackdancers: boolean;
   participants: string[];
   participantSubmissionNumbers: number[];
@@ -69,7 +69,7 @@ export class AirtableService {
         "Song Duration": `${
           submissionData.songMinutes
         }:${submissionData.songSeconds.toString().padStart(2, "0")}`,
-        "Google Drive Link": submissionData.googleDriveLink,
+        "YouTube Link": submissionData.youtubeLink,
         "Has Backdancers": submissionData.hasBackdancers,
         "Participants with Submissions": submissionData.participants
           .map((participant, index) => {
@@ -166,7 +166,7 @@ export class AirtableService {
         "Song Duration": `${
           submissionData.songMinutes
         }:${submissionData.songSeconds.toString().padStart(2, "0")}`,
-        "Google Drive Link": submissionData.googleDriveLink,
+        "YouTube Link": submissionData.youtubeLink,
         "Has Backdancers": submissionData.hasBackdancers,
         "Participants with Submissions": submissionData.participants
           .map((participant, index) => {

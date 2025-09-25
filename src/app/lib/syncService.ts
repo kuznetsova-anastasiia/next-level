@@ -24,7 +24,7 @@ export class SyncService {
         songName: submission.songName,
         songMinutes: submission.songMinutes,
         songSeconds: submission.songSeconds,
-        googleDriveLink: submission.googleDriveLink,
+        youtubeLink: submission.youtubeLink,
         hasBackdancers: submission.hasBackdancers,
         participants: submission.participants,
         participantSubmissionNumbers: submission.participantSubmissionNumbers,

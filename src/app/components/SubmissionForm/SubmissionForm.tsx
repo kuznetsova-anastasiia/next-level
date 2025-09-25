@@ -27,7 +27,7 @@ export default function SubmissionForm() {
     songName: "",
     songMinutes: "",
     songSeconds: "",
-    googleDriveLink: "",
+    youtubeLink: "",
     hasBackdancers: false,
     participants: [
       { id: "1", name: "", submissionNumber: "" },
@@ -233,7 +233,7 @@ export default function SubmissionForm() {
       "phoneNumber",
       "category",
       "songName",
-      "googleDriveLink",
+      "youtubeLink",
     ];
     for (const field of requiredFields) {
       if (!formData[field as keyof typeof formData]) {
@@ -327,11 +327,11 @@ export default function SubmissionForm() {
       return;
     }
 
-    // Validate Google Drive link format
-    const googleDriveRegex = /^https:\/\/drive\.google\.com\/.+/;
-    if (!googleDriveRegex.test(formData.googleDriveLink)) {
+    // Validate YouTube link format
+    const youtubeRegex = /^https:\/\/(www\.)?youtube\.com\/watch\?v=.+/;
+    if (!youtubeRegex.test(formData.youtubeLink)) {
       setError(
-        "Посилання має бути у форматі Google Drive (https://drive.google.com/...)"
+        "Посилання має бути у форматі YouTube (https://www.youtube.com/watch?v=...)"
       );
       setLoading(false);
       return;
@@ -369,7 +369,7 @@ export default function SubmissionForm() {
           songName: "",
           songMinutes: "",
           songSeconds: "",
-          googleDriveLink: "",
+          youtubeLink: "",
           hasBackdancers: false,
           participants: [{ id: "1", name: "", submissionNumber: "" }], // Reset to one participant
           hasProps: false,
@@ -591,18 +591,18 @@ export default function SubmissionForm() {
           </div>
 
           <div className={styles.inputGroup}>
-            <label htmlFor="googleDriveLink">Посилання на Google Drive *</label>
+            <label htmlFor="youtubeLink">Посилання на YouTube *</label>
             <input
               type="url"
-              id="googleDriveLink"
-              name="googleDriveLink"
-              value={formData.googleDriveLink}
+              id="youtubeLink"
+              name="youtubeLink"
+              value={formData.youtubeLink}
               onChange={handleInputChange}
               required
               className={styles.input}
-              placeholder="https://drive.google.com/..."
-              pattern="https://drive\.google\.com/.*"
-              title="Введіть посилання на Google Drive"
+              placeholder="https://www.youtube.com/watch?v=..."
+              pattern="https://(www\.)?youtube\.com/watch\?v=.*"
+              title="Введіть посилання на YouTube"
             />
           </div>
 

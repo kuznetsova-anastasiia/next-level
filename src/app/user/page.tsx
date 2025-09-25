@@ -14,7 +14,7 @@ interface Submission {
   songName: string;
   songMinutes: number;
   songSeconds: number;
-  googleDriveLink: string;
+  youtubeLink: string;
   hasBackdancers: boolean;
   participants: string[];
   participantSubmissionNumbers: number[];
@@ -265,14 +265,14 @@ export default function UserPage() {
                   </div>
 
                   <div className={styles.detailRow}>
-                    <span className={styles.detailLabel}>Google Drive:</span>
+                    <span className={styles.detailLabel}>YouTube:</span>
                     <a
-                      href={submission.googleDriveLink}
+                      href={submission.youtubeLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={styles.driveLink}
                     >
-                      Переглянути файли
+                      Переглянути відео
                     </a>
                   </div>
 

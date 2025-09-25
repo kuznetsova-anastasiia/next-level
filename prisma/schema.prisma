@@ -34,7 +34,7 @@ model Submission {
   songName         String
   songMinutes      Int
   songSeconds      Int
-  googleDriveLink  String   // Required Google Drive link
+  youtubeLink      String   // Required YouTube link
   hasBackdancers   Boolean  @default(false)
   participants     String[] // Array of participant names
   participantSubmissionNumbers Int[] // Array of submission numbers for each participant

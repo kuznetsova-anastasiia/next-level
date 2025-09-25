@@ -26,7 +26,7 @@ model User {
 
 model Submission {
   id               String   @id @default(auto()) @map("_id") @db.ObjectId
-  submissionNumber Int      @unique
+  submissionNumber Int      
   name             String
   nickname         String
   phoneNumber      String

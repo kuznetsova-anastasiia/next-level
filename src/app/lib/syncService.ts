@@ -14,20 +14,40 @@ export class SyncService {
         throw new Error("Submission not found");
       }
 
+      // Prepare submission data for Airtable
+      const submissionData = {
+        submissionNumber: submission.submissionNumber,
+        name: submission.name,
+        nickname: submission.nickname,
+        phoneNumber: submission.phoneNumber,
+        category: submission.category,
+        songName: submission.songName,
+        songMinutes: submission.songMinutes,
+        songSeconds: submission.songSeconds,
+        googleDriveLink: submission.googleDriveLink,
+        hasBackdancers: submission.hasBackdancers,
+        participants: submission.participants,
+        participantSubmissionNumbers: submission.participantSubmissionNumbers,
+        hasProps: submission.hasProps,
+        usingBackground: submission.usingBackground,
+        comment: submission.comment || undefined,
+        level: submission.level || undefined,
+        userEmail: submission.user.email,
+      };
+
       // If already synced, update existing record
       if (submission.airtableId) {
-        await AirtableService.updateSubmission(submission.airtableId, {
-          ...submission,
-          userEmail: submission.user.email,
-        });
+        await AirtableService.updateSubmission(
+          submission.airtableId,
+          submissionData
+        );
         return submission.airtableId;
       }
 
       // Create new Airtable record
-      const airtableRecord = await AirtableService.createSubmission({
-        ...submission,
-        userEmail: submission.user.email,
-      });
+      const airtableRecord = await AirtableService.createSubmission(
+        submissionData
+      );
 
       // Update MongoDB with Airtable ID
       await prisma.submission.update({

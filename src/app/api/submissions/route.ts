@@ -80,7 +80,7 @@ export async function POST(request: NextRequest) {
     // Validate participant submission numbers don't exceed 4
     if (
       participantSubmissionNumbers &&
-      participantSubmissionNumbers.some((num) => num > 4)
+      participantSubmissionNumbers.some((num: number) => num > 4)
     ) {
       return NextResponse.json(
         { error: "Кількість номерів учасника не може перевищувати 4" },

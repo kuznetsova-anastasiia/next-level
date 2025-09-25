@@ -22,12 +22,12 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        const airtableId = await SyncService.syncSubmissionToAirtable(
+        const syncedAirtableId = await SyncService.syncSubmissionToAirtable(
           submissionId
         );
         return NextResponse.json({
           message: "Submission synced to Airtable",
-          airtableId,
+          airtableId: syncedAirtableId,
         });
 
       case "sync_status":

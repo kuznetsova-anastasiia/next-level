@@ -17,7 +17,7 @@ model User {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   email     String   @unique
   password  String
-  name      String
+  name      String   @unique
   role      String   @default("user")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -25,15 +25,27 @@ model User {
 }
 
 model Submission {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  nickname  String
-  googleLink String
-  socialLink String
-  comment    String
-  status     String   @default("pending")
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String   @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  submissionNumber Int      @unique
+  name             String
+  nickname         String
+  phoneNumber      String
+  category         String   // solo, duo/trio, team, unformat
+  songName         String
+  songMinutes      Int
+  songSeconds      Int
+  googleDriveLink  String   // Required Google Drive link
+  hasBackdancers   Boolean  @default(false)
+  participants     String[] // Array of participant names
+  participantSubmissionNumbers Int[] // Array of submission numbers for each participant
+  hasProps         Boolean  @default(false)
+  usingBackground  Boolean  @default(false)
+  comment          String?
+  status           String   @default("pending") // pending, payment, accepted, rejected
+  level            String?  // pro, middle, new - set by organizers
+  airtableId       String?  @unique // Airtable record ID for sync
+  user             User     @relation(fields: [userId], references: [id])
+  userId           String   @db.ObjectId
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }

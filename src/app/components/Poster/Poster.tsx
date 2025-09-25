@@ -1,14 +1,12 @@
 import styles from "./Poster.module.scss";
 import Countdown from "../Countdown";
 import MainButton from "../MainButton/MainButton";
-import { RainbowText } from "../RainbowText";
 
 export default function Poster() {
   return (
     <div className={styles.Poster}>
       <div className={styles.Poster__content}>
         <h1 className={styles.Poster__title}>
-          {/* <RainbowText text="BESTies Party" /> */}
           BESTies Party
         </h1>
 

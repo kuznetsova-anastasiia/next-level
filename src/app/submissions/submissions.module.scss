@@ -1,0 +1,70 @@
+@import "../styles/variables";
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: var(--font-tektur);
+}
+
+.info {
+  margin-bottom: 40px;
+  text-align: center;
+
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: $pink-accent;
+    margin-bottom: 30px;
+    text-shadow: 0 0 15px rgba(255, 79, 216, 0.5);
+  }
+}
+
+.rules {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid $border-pink;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+
+  h2 {
+    color: $pink-accent;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-shadow: 0 0 8px rgba(255, 79, 216, 0.3);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+
+    li {
+      color: $white;
+      margin-bottom: 12px;
+      padding-left: 0;
+      line-height: 1.6;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .info h1 {
+    font-size: 28px;
+  }
+
+  .rules {
+    padding: 16px;
+  }
+}

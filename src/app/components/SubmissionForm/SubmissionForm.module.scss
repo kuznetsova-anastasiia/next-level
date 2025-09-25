@@ -1,0 +1,501 @@
+@import "../../styles/variables";
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: var(--font-tektur);
+}
+
+.submissionCountInfo {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid $border-pink;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+
+  p {
+    color: $white;
+    margin: 0;
+    font-size: 16px;
+
+    strong {
+      color: $pink-accent;
+      font-weight: 700;
+    }
+  }
+
+  .limitReached {
+    color: #ef4444;
+    font-weight: 600;
+  }
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+  color: $pink-accent;
+  text-shadow: 0 0 10px rgba(255, 79, 216, 0.5);
+}
+
+.loginRequired {
+  text-align: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border: 2px solid $border-pink;
+
+  h2 {
+    color: $pink-accent;
+    margin-bottom: 16px;
+  }
+
+  p {
+    color: $white;
+    margin-bottom: 20px;
+  }
+
+  .loginLink {
+    display: inline-block;
+    background: $pink-accent;
+    color: $white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: darken($pink-accent, 10%);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.success {
+  background: rgba(34, 197, 94, 0.1);
+  border: 2px solid #22c55e;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+
+  h3 {
+    color: #22c55e;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    color: $white;
+    margin: 0;
+  }
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 2px solid #ef4444;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+
+  h3 {
+    color: #ef4444;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    color: $white;
+    margin: 0;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.section {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid $border-pink;
+  border-radius: 12px;
+  padding: 24px;
+
+  h2 {
+    color: $pink-accent;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    text-shadow: 0 0 8px rgba(255, 79, 216, 0.3);
+  }
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    color: $white;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  .input,
+  .select,
+  .textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid $border-pink;
+    border-radius: 8px;
+    color: $white;
+    font-family: var(--font-tektur);
+    font-size: 14px;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $pink-accent;
+      box-shadow: 0 0 0 3px rgba(255, 79, 216, 0.1);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .select {
+    background: rgba(255, 255, 255, 0.1);
+    color: $white;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff4fd8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+
+    option {
+      background: $dark-main;
+      color: $white;
+      padding: 8px 12px;
+    }
+
+    &:hover {
+      border-color: $pink-accent;
+    }
+  }
+
+  .textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+}
+
+.durationInputs {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  .durationField {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .input {
+      width: 80px;
+    }
+
+    span {
+      color: $white;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+}
+
+.checkboxGroup {
+  margin-bottom: 20px;
+
+  .checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: $white;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+
+    .checkbox {
+      width: 18px;
+      height: 18px;
+      accent-color: $pink-accent;
+      cursor: pointer;
+    }
+  }
+}
+
+.participantRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 79, 216, 0.2);
+  border-radius: 8px;
+
+  .participantInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .participantNumber {
+    color: $pink-accent;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .participantInputs {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .participantNameInput {
+    flex: 1;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid $border-pink;
+    border-radius: 8px;
+    color: $white;
+    font-family: var(--font-tektur);
+    font-size: 14px;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $pink-accent;
+      box-shadow: 0 0 0 3px rgba(255, 79, 216, 0.1);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .participantNumberInput {
+    width: 100px;
+    padding: 12px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid $border-pink;
+    border-radius: 8px;
+    color: $white;
+    font-family: var(--font-tektur);
+    font-size: 14px;
+    text-align: center;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $pink-accent;
+      box-shadow: 0 0 0 3px rgba(255, 79, 216, 0.1);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .removeButton {
+    background: #ef4444;
+    color: $white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    margin-top: 20px;
+
+    &:hover {
+      background: #dc2626;
+    }
+  }
+}
+
+.addButton {
+  background: $pink-accent;
+  color: $white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: darken($pink-accent, 10%);
+    transform: translateY(-1px);
+  }
+}
+
+.submitButton {
+  background: linear-gradient(135deg, $pink-accent, #ff6b9d);
+  color: $white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-tektur);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 79, 216, 0.3);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .section {
+    padding: 16px;
+  }
+
+  .inputGroup {
+    .select {
+      font-size: 16px; // Prevents zoom on iOS
+      padding: 14px 40px 14px 16px;
+      min-height: 48px; // Better touch target
+
+      option {
+        font-size: 16px;
+        padding: 12px 16px;
+        line-height: 1.4;
+      }
+    }
+
+    .input,
+    .textarea {
+      font-size: 16px; // Prevents zoom on iOS
+      padding: 14px 16px;
+      min-height: 48px; // Better touch target
+    }
+  }
+
+  .durationInputs {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .participantRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .participantInputs {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .participantNumberInput {
+    width: 100%;
+    font-size: 16px;
+    padding: 14px 16px;
+    min-height: 48px;
+  }
+
+  .participantNameInput {
+    font-size: 16px;
+    padding: 14px 16px;
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .section {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .inputGroup {
+    margin-bottom: 16px;
+
+    label {
+      font-size: 13px;
+    }
+
+    .select {
+      font-size: 16px;
+      padding: 12px 36px 12px 12px;
+      min-height: 44px;
+
+      option {
+        font-size: 15px;
+        padding: 10px 12px;
+      }
+    }
+
+    .input,
+    .textarea {
+      font-size: 16px;
+      padding: 12px;
+      min-height: 44px;
+    }
+  }
+
+  .participantRow {
+    padding: 12px;
+  }
+
+  .participantNumberInput,
+  .participantNameInput {
+    font-size: 16px;
+    padding: 12px;
+    min-height: 44px;
+  }
+
+  .submitButton {
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+}

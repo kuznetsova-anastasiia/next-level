@@ -1,0 +1,103 @@
+@import "../../styles/variables";
+
+.countdown {
+  text-align: center;
+  margin-bottom: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid $border-pink;
+  border-radius: 12px;
+  padding: 30px 20px;
+
+  h2 {
+    font-family: var(--font-press-start);
+    font-size: 24px;
+    color: $pink-accent;
+    text-shadow: 0 0 8px rgba(255, 79, 216, 0.3);
+    margin-bottom: 25px;
+  }
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.timeUnit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 79, 216, 0.3);
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  min-width: 90px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 79, 216, 0.1);
+    border-color: $pink-accent;
+  }
+}
+
+.value {
+  font-family: var(--font-tektur);
+  font-size: 36px;
+  font-weight: 700;
+  color: $white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1;
+}
+
+.label {
+  font-family: var(--font-tektur);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  margin-top: 5px;
+  letter-spacing: 1px;
+}
+
+.separator {
+  font-family: var(--font-tektur);
+  font-size: 36px;
+  color: $pink-accent;
+  text-shadow: 0 0 8px rgba(255, 79, 216, 0.3);
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .countdown {
+    padding: 20px 15px;
+    margin-bottom: 30px;
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+  }
+
+  .timer {
+    gap: 15px;
+  }
+
+  .timeUnit {
+    padding: 12px 16px;
+    min-width: 75px;
+  }
+
+  .value {
+    font-size: 28px;
+  }
+
+  .label {
+    font-size: 11px;
+  }
+
+  .separator {
+    font-size: 28px;
+  }
+}

@@ -1,20 +1,36 @@
 import styles from "./MainInfo.module.scss";
+import GoogleMap from "../GoogleMap";
 
 export default function MainInfo() {
   return (
     <div className={styles.MainInfo}>
       <div className={`${styles.MainInfo__basicInfo} ${styles.MainInfo__part}`}>
         <div className={styles.MainInfo__info}>
-          <p>Дата: ???</p>
-          <p>Локація: ???</p>
+          <p>Дата: 30.11.2025</p>
+          <p>
+            Локація: Palladium,
+            <br />
+            Італійський бульвар 4 (м.Одеса)
+          </p>
         </div>
 
-        <p className={styles.MainInfo__soon}>SOON</p>
+        <div className={styles.MainInfo__mapContainer}>
+          <GoogleMap
+            center={{
+              lat: 46.46799872516157, // Odesa coordinates
+              lng: 30.746242025586668,
+            }}
+            zoom={16}
+            address="Італійський бульвар, 4"
+          />
+        </div>
       </div>
 
       <div className={styles.MainInfo__divider} />
 
-      <div className={`${styles.MainInfo__nominations} ${styles.MainInfo__part}`}>
+      <div
+        className={`${styles.MainInfo__nominations} ${styles.MainInfo__part}`}
+      >
         <h2 className={styles.MainInfo__nominationsTitle}>Номінації</h2>
 
         <div className={styles.MainInfo__nominationsList}>
@@ -36,7 +52,7 @@ export default function MainInfo() {
             <p>MIDDLE: 1🏆 2🏆 3🏆</p>
             <p>NEW: 1🏆 2🏆 3🏆</p>
           </div>
-          
+
           <div className={styles.MainInfo__nomination}>
             <h3 className={styles.MainInfo__nominationTitle}>Неформат</h3>
             <p>Team: 1🏆 2🏆 3🏆</p>

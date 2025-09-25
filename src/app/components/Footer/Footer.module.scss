@@ -9,4 +9,7 @@
   border: 3.5px solid $border-pink;
   border-radius: $radius;
   padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -1,35 +1,54 @@
-export default function Submissions() {
-  return (
-    <div>
-      <h1>Подача заявки</h1>
+"use client";
 
-      <div>
-        <p>- Подача заявок триває з 01.10.2025 по 10.11.2025</p>
-        <p>- При подачі заявки всі обов&apos;язкові поля мають бути заповнені</p>
-        <p>- Результати будуть оголошені напротязі тижня з моменту закриття подачі заявок</p>
-        <p>- Один учасник може подати до 4 заявок</p>
-        <p>- Заявка подається на кожну номінацію окремо</p>
-        <p>- Музика та/або фон мають бути завантажені у папку на Google Drive та посилання на них має бути вказано в полі &quot;Посилання на музику та/або фон&quot;</p>
+import { useState, useEffect } from "react";
+import SubmissionForm from "../components/SubmissionForm/SubmissionForm";
+import SubmissionsCountdown from "../components/SubmissionsCountdown/SubmissionsCountdown";
+import styles from "./submissions.module.scss";
+
+export default function Submissions() {
+  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
+
+  useEffect(() => {
+    const checkRegistrationStatus = () => {
+      const now = new Date();
+      const registrationDate = new Date("2025-09-01T00:00:00");
+      setIsRegistrationOpen(now >= registrationDate);
+    };
+
+    checkRegistrationStatus();
+    const interval = setInterval(checkRegistrationStatus, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.info}>
+        <h1>Подача заявки</h1>
+
+        <div className={styles.rules}>
+          <h2>Правила подачі заявок</h2>
+          <ul>
+            <li>- Подача заявок триває з 01.10.2025 по 10.11.2025</li>
+            <li>
+              - При подачі заявки всі обов&apos;язкові поля мають бути заповнені
+            </li>
+            <li>
+              - Результати будуть оголошені напротязі тижня з моменту закриття
+              подачі заявок
+            </li>
+            <li>- Один учасник може подати до 4 заявок</li>
+            <li>- Заявка подається на кожну номінацію окремо</li>
+            <li>
+              - Музика та/або фон мають бути завантажені у папку на Google Drive
+              та посилання на них має бути вказано в полі &quot;Посилання на
+              Google Drive&quot;
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <form>
-        <div>
-          <label htmlFor="name">Ім&apos;я</label>
-          <input type="text" id="name" name="name" />
-        </div>
-        
-        <div>
-          <label htmlFor="email">Нік/Назва команди</label>
-          <input type="text" id="nickname" name="nickname" />
-        </div>
-        
-        <div>
-          <label htmlFor="phone">Телефон</label>
-          <input type="tel" id="phone" name="phone" />
-        </div>
-        
-        
-      </form>
+      {!isRegistrationOpen ? <SubmissionsCountdown /> : <SubmissionForm />}
     </div>
-  )
+  );
 }

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import styles from "./Countdown.module.scss";
+import styles from "./SubmissionsCountdown.module.scss";
 
-export default function Countdown() {
+export default function SubmissionsCountdown() {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -12,7 +12,7 @@ export default function Countdown() {
   });
 
   useEffect(() => {
-    const targetDate = new Date("2025-11-30T11:00:00").getTime();
+    const targetDate = new Date("2025-10-01T00:00:00").getTime();
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -38,34 +38,27 @@ export default function Countdown() {
   }, []);
 
   return (
-    <div className={styles.countdownContainer}>
-      <div className={styles.countdown}>
+    <div className={styles.countdown}>
+      <h2>Реєстрація відкриється через:</h2>
+      <div className={styles.timer}>
         <div className={styles.timeUnit}>
-          <div className={styles.timeValue}>
-            {timeLeft.days.toString().padStart(2, "0")}
-          </div>
-          <div className={styles.timeLabel}>DAYS</div>
+          <span className={styles.value}>{timeLeft.days}</span>
+          <span className={styles.label}>днів</span>
         </div>
         <div className={styles.separator}>:</div>
         <div className={styles.timeUnit}>
-          <div className={styles.timeValue}>
-            {timeLeft.hours.toString().padStart(2, "0")}
-          </div>
-          <div className={styles.timeLabel}>HRS</div>
+          <span className={styles.value}>{timeLeft.hours}</span>
+          <span className={styles.label}>годин</span>
         </div>
         <div className={styles.separator}>:</div>
         <div className={styles.timeUnit}>
-          <div className={styles.timeValue}>
-            {timeLeft.minutes.toString().padStart(2, "0")}
-          </div>
-          <div className={styles.timeLabel}>MIN</div>
+          <span className={styles.value}>{timeLeft.minutes}</span>
+          <span className={styles.label}>хвилин</span>
         </div>
         <div className={styles.separator}>:</div>
         <div className={styles.timeUnit}>
-          <div className={styles.timeValue}>
-            {timeLeft.seconds.toString().padStart(2, "0")}
-          </div>
-          <div className={styles.timeLabel}>SEC</div>
+          <span className={styles.value}>{timeLeft.seconds}</span>
+          <span className={styles.label}>секунд</span>
         </div>
       </div>
     </div>

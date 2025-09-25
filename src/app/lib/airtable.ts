@@ -21,7 +21,7 @@ export interface AirtableSubmission {
     Category: string;
     "Song Name": string;
     "Song Duration": string;
-    "Google Drive Link": string;
+    "YouTube Link": string;
     "Has Backdancers": boolean;
     "Participants with Submissions": string;
     "Has Props": boolean;

@@ -116,7 +116,7 @@ export class SyncService {
             songSeconds: parseInt(
               airtableSubmission.fields["Song Duration"].split(":")[1]
             ),
-            googleDriveLink: airtableSubmission.fields["Google Drive Link"],
+            youtubeLink: airtableSubmission.fields["YouTube Link"],
             hasBackdancers: airtableSubmission.fields["Has Backdancers"],
             participants: airtableSubmission.fields[
               "Participants with Submissions"

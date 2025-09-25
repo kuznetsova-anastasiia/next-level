@@ -22,18 +22,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check if username already exists
-    const existingUserByName = await prisma.user.findUnique({
-      where: { name },
-    });
-
-    if (existingUserByName) {
-      return NextResponse.json(
-        { error: "Username already taken" },
-        { status: 400 }
-      );
-    }
-
     // Check if email already exists
     const existingUserByEmail = await prisma.user.findUnique({
       where: { email },

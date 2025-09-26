@@ -43,6 +43,13 @@ interface PasswordResetEmailData {
   resetToken: string;
 }
 
+interface ContactEmailData {
+  senderName: string;
+  senderEmail: string;
+  subject: string;
+  message: string;
+}
+
 class EmailService {
   private transporter: nodemailer.Transporter;
 
@@ -178,6 +185,31 @@ class EmailService {
     } catch (error) {
       console.error("Error sending password reset email:", error);
       throw new Error("Failed to send password reset email");
+    }
+  }
+
+  async sendContactEmail(data: ContactEmailData): Promise<void> {
+    const { senderName, senderEmail, subject, message } = data;
+
+    const mailOptions = {
+      from: `"BESTies Party" <nextlevel.party.ua@gmail.com>`,
+      to: "nextlevel.party.ua@gmail.com", // Your email address
+      replyTo: senderEmail,
+      subject: `📧 Contact Form: ${subject}`,
+      html: this.generateContactHTML({
+        senderName,
+        senderEmail,
+        subject,
+        message,
+      }),
+    };
+
+    try {
+      await this.transporter.sendMail(mailOptions);
+      console.log(`Contact email sent from ${senderEmail}`);
+    } catch (error) {
+      console.error("Error sending contact email:", error);
+      throw new Error("Failed to send contact email");
     }
   }
 
@@ -993,6 +1025,166 @@ class EmailService {
             <div class="footer">
                 <p><strong>⚠️ Це автоматично згенероване повідомлення</strong></p>
                 <p>Будь ласка, не відповідайте на цей email. Для зв'язку використовуйте наші соціальні мережі вище.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    `;
+  }
+
+  private generateContactHTML(data: {
+    senderName: string;
+    senderEmail: string;
+    subject: string;
+    message: string;
+  }): string {
+    const { senderName, senderEmail, subject, message } = data;
+
+    return `
+    <!DOCTYPE html>
+    <html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact Form - BESTies Party</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f4f4f4;
+            }
+            .container {
+                background: white;
+                border-radius: 10px;
+                padding: 30px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            }
+            .header {
+                text-align: center;
+                border-bottom: 3px solid #ff4fd8;
+                padding-bottom: 20px;
+                margin-bottom: 30px;
+            }
+            .title {
+                color: #ff4fd8;
+                font-size: 28px;
+                margin: 0;
+                text-shadow: 0 2px 4px rgba(255, 79, 216, 0.3);
+            }
+            .subtitle {
+                color: #666;
+                font-size: 16px;
+                margin: 10px 0 0 0;
+            }
+            .contact-details {
+                background: #f8f9fa;
+                border-left: 4px solid #ff4fd8;
+                padding: 20px;
+                margin: 20px 0;
+                border-radius: 0 8px 8px 0;
+            }
+            .contact-details h3 {
+                color: #ff4fd8;
+                margin-top: 0;
+                font-size: 18px;
+            }
+            .field {
+                margin-bottom: 15px;
+            }
+            .field-label {
+                font-weight: bold;
+                color: #555;
+                display: inline-block;
+                width: 100px;
+            }
+            .field-value {
+                color: #333;
+            }
+            .message-content {
+                background: #f8f9fa;
+                border: 1px solid #e9ecef;
+                border-radius: 8px;
+                padding: 20px;
+                margin: 20px 0;
+                white-space: pre-wrap;
+                font-family: 'Courier New', monospace;
+                line-height: 1.5;
+            }
+            .footer {
+                text-align: center;
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 1px solid #eee;
+                color: #666;
+                font-size: 14px;
+            }
+            .social-links {
+                margin: 20px 0;
+            }
+            .social-link {
+                display: inline-block;
+                margin: 0 10px;
+                padding: 8px 16px;
+                background: #ff4fd8;
+                color: white;
+                text-decoration: none;
+                border-radius: 20px;
+                font-weight: bold;
+                transition: background 0.3s ease;
+            }
+            .social-link:hover {
+                background: #e03db8;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1 class="title">📧 BESTies Party</h1>
+                <p class="subtitle">Нове повідомлення з контактної форми</p>
+            </div>
+
+            <div class="contact-details">
+                <h3>📋 Деталі відправника</h3>
+                <div class="field">
+                    <span class="field-label">Ім'я:</span>
+                    <span class="field-value">${senderName}</span>
+                </div>
+                <div class="field">
+                    <span class="field-label">Email:</span>
+                    <span class="field-value">${senderEmail}</span>
+                </div>
+                <div class="field">
+                    <span class="field-label">Тема:</span>
+                    <span class="field-value">${subject}</span>
+                </div>
+            </div>
+
+            <div class="message-content">
+                ${message}
+            </div>
+
+            <div class="footer">
+                <p><strong>💌 Відповідь на це повідомлення</strong></p>
+                <p>Ви можете відповісти напряму на email: ${senderEmail}</p>
+                
+                <div class="social-links">
+                    <p>Або зв'яжіться з нами через соціальні мережі:</p>
+                    <a href="https://www.instagram.com/next.level.party.ua/" class="social-link" target="_blank">
+                        📷 Instagram
+                    </a>
+                    <a href="https://t.me/nextlevel_party" class="social-link" target="_blank">
+                        ✈️ Telegram
+                    </a>
+                </div>
+                
+                <p style="margin-top: 20px; font-size: 12px; color: #999;">
+                    <strong>⚠️ Це повідомлення надіслано через контактну форму BESTies Party</strong>
+                </p>
             </div>
         </div>
     </body>

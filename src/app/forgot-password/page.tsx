@@ -2,41 +2,38 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./login.module.scss";
-import Stars from "../components/Stars";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import { useAuth } from "../contexts/AuthContext";
+import styles from "./forgot-password.module.scss";
 
-export default function Login() {
+export default function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
-  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setMessage("");
 
     try {
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch("/api/auth/forgot-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        login(data.user);
-        router.push("/");
+        setMessage(
+          "Якщо акаунт з таким email існує, ми надіслали вам посилання для скидання пароля."
+        );
       } else {
-        setError(data.error || "Помилка входу");
+        setError(data.error || "Сталася помилка. Спробуйте ще раз.");
       }
     } catch (error) {
       setError("Сталася помилка. Спробуйте ще раз.");
@@ -48,7 +45,12 @@ export default function Login() {
   return (
     <main className={styles.main}>
       <div className={styles.container}>
-        <h1 className={styles.title}>Вхід</h1>
+        <h1 className={styles.title}>Забули пароль?</h1>
+        <p className={styles.subtitle}>
+          Введіть ваш email адрес, і ми надішлемо вам посилання для скидання
+          пароля.
+        </p>
+
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
             <label htmlFor="email">Email</label>
@@ -59,34 +61,25 @@ export default function Login() {
               onChange={(e) => setEmail(e.target.value)}
               required
               className={styles.input}
+              placeholder="your@email.com"
             />
           </div>
-          <div className={styles.inputGroup}>
-            <label htmlFor="password">Пароль</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className={styles.input}
-            />
-          </div>
+
           {error && <div className={styles.error}>{error}</div>}
+          {message && <div className={styles.success}>{message}</div>}
+
           <button type="submit" disabled={loading} className={styles.button}>
-            {loading ? "Входимо..." : "Увійти"}
+            {loading ? "Надсилаємо..." : "Надіслати посилання"}
           </button>
         </form>
+
         <div className={styles.links}>
-          <a href="/forgot-password" className={styles.linkText}>
-            Забули пароль?
+          <a href="/login" className={styles.link}>
+            ← Назад до входу
           </a>
-          <p className={styles.link}>
-            Немає акаунту?{" "}
-            <a href="/register" className={styles.linkText}>
-              Зареєструватися тут
-            </a>
-          </p>
+          <a href="/register" className={styles.link}>
+            Немає акаунту? Зареєструватися
+          </a>
         </div>
       </div>
     </main>

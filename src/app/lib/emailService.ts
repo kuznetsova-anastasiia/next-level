@@ -37,6 +37,12 @@ interface CommentEmailData {
   adminName: string;
 }
 
+interface PasswordResetEmailData {
+  userEmail: string;
+  userName: string;
+  resetToken: string;
+}
+
 class EmailService {
   private transporter: nodemailer.Transporter;
 
@@ -150,6 +156,28 @@ class EmailService {
     } catch (error) {
       console.error("Error sending comment notification email:", error);
       throw new Error("Failed to send comment notification email");
+    }
+  }
+
+  async sendPasswordResetEmail(data: PasswordResetEmailData): Promise<void> {
+    const { userEmail, userName, resetToken } = data;
+
+    const mailOptions = {
+      from: `"BESTies Party" <nextlevel.party.ua@gmail.com>`,
+      to: userEmail,
+      subject: `🔐 Скидання пароля - BESTies Party`,
+      html: this.generatePasswordResetHTML({
+        userName,
+        resetToken,
+      }),
+    };
+
+    try {
+      await this.transporter.sendMail(mailOptions);
+      console.log(`Password reset email sent to ${userEmail}`);
+    } catch (error) {
+      console.error("Error sending password reset email:", error);
+      throw new Error("Failed to send password reset email");
     }
   }
 
@@ -752,6 +780,195 @@ class EmailService {
                 <div class="comment-content">
                     "${commentContent}"
                 </div>
+            </div>
+
+            <div class="contact-info">
+                <h3>📱 Маєте питання?</h3>
+                <p>Звертайтесь до нас у соціальних мережах!</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/next.level.party.ua/" class="social-link" target="_blank">
+                        📷 Instagram
+                    </a>
+                    <a href="https://t.me/nextlevel_party" class="social-link" target="_blank">
+                        ✈️ Telegram
+                    </a>
+                </div>
+            </div>
+
+            <div class="signature">
+                З любов'ю,<br>
+                Your bestie 💕<br>
+                BESTies Party Team
+            </div>
+
+            <div class="footer">
+                <p><strong>⚠️ Це автоматично згенероване повідомлення</strong></p>
+                <p>Будь ласка, не відповідайте на цей email. Для зв'язку використовуйте наші соціальні мережі вище.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    `;
+  }
+
+  private generatePasswordResetHTML(data: {
+    userName: string;
+    resetToken: string;
+  }): string {
+    const { userName, resetToken } = data;
+    const resetUrl = `${
+      process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+    }/reset-password?token=${resetToken}`;
+
+    return `
+    <!DOCTYPE html>
+    <html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Скидання пароля - BESTies Party</title>
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            }
+            .container {
+                background: white;
+                border-radius: 15px;
+                padding: 30px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+                border: 3px solid #ff4081;
+            }
+            .header {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            .title {
+                color: #ff4081;
+                font-size: 28px;
+                font-weight: bold;
+                margin: 0 0 10px 0;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            }
+            .subtitle {
+                color: #666;
+                font-size: 16px;
+                margin: 0;
+            }
+            .greeting {
+                font-size: 18px;
+                margin-bottom: 20px;
+                color: #333;
+            }
+            .reset-box {
+                background: linear-gradient(135deg, #ff4081, #ff6b9d);
+                color: white;
+                padding: 20px;
+                border-radius: 10px;
+                text-align: center;
+                margin: 20px 0;
+            }
+            .reset-button {
+                display: inline-block;
+                background: white;
+                color: #ff4081;
+                padding: 15px 30px;
+                text-decoration: none;
+                border-radius: 25px;
+                font-weight: bold;
+                font-size: 16px;
+                margin: 15px 0;
+                transition: all 0.3s ease;
+            }
+            .reset-button:hover {
+                background: #f0f0f0;
+                transform: translateY(-2px);
+            }
+            .warning {
+                background: #fff3cd;
+                border: 1px solid #ffeaa7;
+                color: #856404;
+                padding: 15px;
+                border-radius: 8px;
+                margin: 20px 0;
+            }
+            .warning h3 {
+                margin-top: 0;
+                color: #856404;
+            }
+            .contact-info {
+                text-align: center;
+                margin: 30px 0;
+                padding: 20px;
+                background: #f0f0f0;
+                border-radius: 10px;
+            }
+            .social-links {
+                margin: 15px 0;
+            }
+            .social-link {
+                display: inline-block;
+                margin: 0 10px;
+                padding: 10px 20px;
+                background: #ff4081;
+                color: white;
+                text-decoration: none;
+                border-radius: 25px;
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }
+            .social-link:hover {
+                background: #ff6b9d;
+                transform: translateY(-2px);
+            }
+            .signature {
+                text-align: right;
+                margin-top: 30px;
+                font-style: italic;
+                color: #ff4081;
+                font-weight: bold;
+            }
+            .footer {
+                text-align: center;
+                margin-top: 30px;
+                padding-top: 20px;
+                border-top: 1px solid #eee;
+                color: #666;
+                font-size: 14px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1 class="title">🔐 BESTies Party</h1>
+                <p class="subtitle">Скидання пароля</p>
+            </div>
+
+            <div class="greeting">
+                Привіт, ${userName}! 👋
+            </div>
+
+            <div class="reset-box">
+                <h2>Запит на скидання пароля</h2>
+                <p>Ми отримали запит на скидання пароля для вашого акаунту BESTies Party</p>
+                <a href="${resetUrl}" class="reset-button">
+                    Скинути пароль
+                </a>
+            </div>
+
+            <div class="warning">
+                <h3>⚠️ Важливо:</h3>
+                <ul>
+                    <li>Це посилання дійсне протягом 1 години</li>
+                    <li>Посилання можна використати тільки один раз</li>
+                    <li>Якщо ви не запитували скидання пароля, проігноруйте це повідомлення</li>
+                </ul>
             </div>
 
             <div class="contact-info">

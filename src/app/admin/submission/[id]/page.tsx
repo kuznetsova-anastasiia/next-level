@@ -39,6 +39,7 @@ interface Submission {
   participantSubmissionsInfo: string[];
   hasProps: boolean;
   usingBackground: boolean;
+  materialsSent: boolean;
   comment: string | null;
   status: string;
   level: string | null;

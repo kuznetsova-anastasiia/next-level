@@ -85,7 +85,7 @@ export default function ContactPage() {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <h1 className={styles.title}>Зв'яжіться з нами</h1>
+        <h1 className={styles.title}>Зв&apos;яжіться з нами</h1>
         <p className={styles.description}>
           Маєте питання або пропозиції? Ми завжди раді почути від вас!
         </p>
@@ -171,7 +171,7 @@ export default function ContactPage() {
         </form>
 
         <div className={styles.contactInfo}>
-          <h3>Альтернативні способи зв'язку</h3>
+          <h3>Альтернативні способи зв&apos;язку</h3>
           <div className={styles.socialLinks}>
             <a
               href="https://www.instagram.com/next.level.party.ua/"

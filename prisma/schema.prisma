@@ -43,6 +43,7 @@ model Submission {
   participantSubmissionsInfo String[] // Array of submissions info for each participant
   hasProps         Boolean  @default(false)
   usingBackground  Boolean  @default(false)
+  materialsSent    Boolean  @default(false)
   comment          String?
   status           String   @default("pending") // pending, payment, accepted, rejected
   level            String?  // pro, middle, new - set by organizers

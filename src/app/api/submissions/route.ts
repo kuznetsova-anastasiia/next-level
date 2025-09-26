@@ -20,6 +20,7 @@ export async function POST(request: NextRequest) {
       participantSubmissionsInfo,
       hasProps,
       usingBackground,
+      materialsSent,
       comment,
       userId,
     } = await request.json();
@@ -98,6 +99,7 @@ export async function POST(request: NextRequest) {
         participantSubmissionsInfo: participantSubmissionsInfo || [],
         hasProps: hasProps || false,
         usingBackground: usingBackground || false,
+        materialsSent: materialsSent || false,
         comment: comment || null,
         userId,
       },

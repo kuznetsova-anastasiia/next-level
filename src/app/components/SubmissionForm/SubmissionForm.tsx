@@ -35,6 +35,7 @@ export default function SubmissionForm() {
     ] as Participant[], // Always start with one participant
     hasProps: false,
     usingBackground: false,
+    materialsSent: false,
     comment: "",
   });
 
@@ -330,6 +331,13 @@ export default function SubmissionForm() {
       return;
     }
 
+    // Validate materials sent confirmation
+    if (!formData.materialsSent) {
+      setError("Ви повинні підтвердити, що надіслали матеріали до Telegram");
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch("/api/submissions", {
         method: "POST",
@@ -372,6 +380,7 @@ export default function SubmissionForm() {
           ], // Reset to one participant
           hasProps: false,
           usingBackground: false,
+          materialsSent: false,
           comment: "",
         });
 
@@ -722,6 +731,21 @@ export default function SubmissionForm() {
                 className={styles.checkbox}
               />
               Я буду використовувати відео/фото для фону
+            </label>
+          </div>
+
+          <div className={styles.checkboxGroup}>
+            <label className={styles.checkboxLabel}>
+              <input
+                type="checkbox"
+                name="materialsSent"
+                checked={formData.materialsSent}
+                onChange={handleInputChange}
+                className={styles.checkbox}
+                required
+              />
+              <span className={styles.required}>*</span>Я підтверджую, що
+              надіслав(ла) музику та відео/фото для фону (якщо потрібно) до <a href="https://t.me/idm_gang" target="_blank" rel="noopener noreferrer">Telegram акаунту</a> організаторів
             </label>
           </div>
 

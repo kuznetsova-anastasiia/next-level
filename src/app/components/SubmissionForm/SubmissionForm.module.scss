@@ -219,15 +219,35 @@
 
 .checkboxGroup {
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 
   .checkboxLabel {
-    display: flex;
+    display: inline;
     align-items: center;
     gap: 12px;
     color: $white;
     font-weight: 600;
     cursor: pointer;
     font-size: 14px;
+
+    a {
+      display: inline;
+      color: $pink-accent;
+    }
+
+    .required {
+      color: #ef4444;
+      font-weight: 700;
+      margin-right: 4px;
+    }
+
+    .telegramText {
+      color: #0088cc;
+      font-weight: 700;
+      text-shadow: 0 0 3px rgba(0, 136, 204, 0.3);
+      display: inline;
+    }
 
     .checkbox {
       width: 18px;

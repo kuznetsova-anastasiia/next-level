@@ -36,10 +36,10 @@ export default function Login() {
         login(data.user);
         router.push("/");
       } else {
-        setError(data.error || "Login failed");
+        setError(data.error || "Помилка входу");
       }
     } catch (error) {
-      setError("An error occurred. Please try again.");
+      setError("Сталася помилка. Спробуйте ще раз.");
     } finally {
       setLoading(false);
     }
@@ -48,7 +48,7 @@ export default function Login() {
   return (
     <main className={styles.main}>
       <div className={styles.container}>
-        <h1 className={styles.title}>Login</h1>
+        <h1 className={styles.title}>Вхід</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
             <label htmlFor="email">Email</label>
@@ -62,7 +62,7 @@ export default function Login() {
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Пароль</label>
             <input
               type="password"
               id="password"
@@ -74,13 +74,13 @@ export default function Login() {
           </div>
           {error && <div className={styles.error}>{error}</div>}
           <button type="submit" disabled={loading} className={styles.button}>
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Входимо..." : "Увійти"}
           </button>
         </form>
         <p className={styles.link}>
-          Don&apos;t have an account?{" "}
+          Немає акаунту?{" "}
           <a href="/register" className={styles.linkText}>
-            Register here
+            Зареєструватися тут
           </a>
         </p>
       </div>

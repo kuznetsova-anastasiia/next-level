@@ -10,14 +10,17 @@ export async function POST(request: NextRequest) {
     const usernameRegex = /^[a-z0-9]+$/;
     if (!usernameRegex.test(name)) {
       return NextResponse.json(
-        { error: "Username must contain only lowercase letters and numbers" },
+        {
+          error:
+            "Ім&apos;я користувача повинно містити тільки малі літери та цифри",
+        },
         { status: 400 }
       );
     }
 
     if (name.length < 3) {
       return NextResponse.json(
-        { error: "Username must be at least 3 characters long" },
+        { error: "Ім&apos;я користувача повинно містити принаймні 3 символи" },
         { status: 400 }
       );
     }
@@ -29,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     if (existingUserByEmail) {
       return NextResponse.json(
-        { error: "User already exists with this email" },
+        { error: "Користувач з таким email вже існує" },
         { status: 400 }
       );
     }
@@ -52,7 +55,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       {
-        message: "User created successfully",
+        message: "Користувача успішно створено",
         user: userWithoutPassword,
       },
       { status: 201 }
@@ -60,7 +63,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Registration error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Внутрішня помилка сервера" },
       { status: 500 }
     );
   }

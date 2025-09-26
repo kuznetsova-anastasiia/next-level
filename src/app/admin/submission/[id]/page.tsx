@@ -324,7 +324,7 @@ export default function SubmissionDetailsPage() {
             <div className={styles.detailsSection}>
               <h3>Інформація про учасника</h3>
               <div className={styles.detailRow}>
-                <span className={styles.label}>Ім'я:</span>
+                <span className={styles.label}>Ім&apos;я:</span>
                 <span className={styles.value}>{submission.name}</span>
               </div>
               <div className={styles.detailRow}>

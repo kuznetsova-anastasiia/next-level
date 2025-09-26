@@ -24,26 +24,26 @@ export default function Register() {
     const usernameRegex = /^[a-z0-9]+$/;
     if (!usernameRegex.test(name)) {
       setError(
-        "Name must contain only lowercase letters and numbers, no spaces or special characters"
+        "Ім&apos;я користувача повинно містити тільки малі літери та цифри, без пробілів та спеціальних символів"
       );
       setLoading(false);
       return;
     }
 
     if (name.length < 3) {
-      setError("Name must be at least 3 characters long");
+      setError("Ім&apos;я користувача повинно містити принаймні 3 символи");
       setLoading(false);
       return;
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setError("Паролі не співпадають");
       setLoading(false);
       return;
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters");
+      setError("Пароль повинен містити принаймні 6 символів");
       setLoading(false);
       return;
     }
@@ -63,10 +63,10 @@ export default function Register() {
         login(data.user);
         router.push("/");
       } else {
-        setError(data.error || "Registration failed");
+        setError(data.error || "Помилка реєстрації");
       }
     } catch (error) {
-      setError("An error occurred. Please try again.");
+      setError("Сталася помилка. Спробуйте ще раз.");
     } finally {
       setLoading(false);
     }
@@ -75,16 +75,16 @@ export default function Register() {
   return (
     <main className={styles.main}>
       <div className={styles.container}>
-        <h1 className={styles.title}>Register</h1>
+        <h1 className={styles.title}>Реєстрація</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
-            <label htmlFor="name">Username</label>
+            <label htmlFor="name">Ім&apos;я користувача</label>
             <input
               type="text"
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value.toLowerCase())}
-              placeholder="lowercase letters and numbers only"
+              placeholder="тільки малі літери та цифри"
               required
               className={styles.input}
             />
@@ -101,7 +101,7 @@ export default function Register() {
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Пароль</label>
             <input
               type="password"
               id="password"
@@ -112,7 +112,7 @@ export default function Register() {
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="confirmPassword">Confirm Password</label>
+            <label htmlFor="confirmPassword">Підтвердити пароль</label>
             <input
               type="password"
               id="confirmPassword"
@@ -124,13 +124,13 @@ export default function Register() {
           </div>
           {error && <div className={styles.error}>{error}</div>}
           <button type="submit" disabled={loading} className={styles.button}>
-            {loading ? "Creating Account..." : "Register"}
+            {loading ? "Створюємо акаунт..." : "Зареєструватися"}
           </button>
         </form>
         <p className={styles.link}>
-          Already have an account?{" "}
+          Вже маєте акаунт?{" "}
           <a href="/login" className={styles.linkText}>
-            Login here
+            Увійти тут
           </a>
         </p>
       </div>

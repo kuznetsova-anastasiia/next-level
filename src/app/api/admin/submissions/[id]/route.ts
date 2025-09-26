@@ -3,10 +3,10 @@ import prisma from "@/app/lib/db";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const submissionId = params.id;
+    const { id: submissionId } = await params;
 
     const submission = await prisma.submission.findUnique({
       where: { id: submissionId },
@@ -54,10 +54,10 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const submissionId = params.id;
+    const { id: submissionId } = await params;
     const { status, level, adminId } = await request.json();
 
     // Get the current submission to track changes

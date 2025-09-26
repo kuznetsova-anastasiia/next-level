@@ -78,7 +78,8 @@
     font-size: 54px;
     font-weight: 900;
     letter-spacing: 6px;
-    text-shadow: 1.5px 1.5px 4px $dark-main, 0 0 2px $pink-accent, 0 0 5px $pink-accent;
+    text-shadow: 1.5px 1.5px 4px $dark-main, 0 0 2px $pink-accent,
+      0 0 5px $pink-accent;
     margin-bottom: 30px;
   }
 
@@ -89,18 +90,104 @@
     top: 31%;
     left: 46%;
     z-index: 3;
-    text-shadow: 2px 2px 4px $dark-main, 0 0 2px $pink-accent, 0 0 5px $pink-accent;
+    text-shadow: 2px 2px 4px $dark-main, 0 0 2px $pink-accent,
+      0 0 5px $pink-accent;
 
     // transform: rotate(-14deg);
     // color: $dark-main;
     font-size: 18px;
     font-weight: 600;
 
-
     img {
       width: 70px;
       height: 50px;
       filter: drop-shadow(2px 2px 4px $pink-accent);
+    }
+  }
+}
+
+// Mobile responsive styles
+@media (max-width: 768px) {
+  .Poster {
+    min-height: 500px;
+    padding: 8px;
+
+    &__content {
+      height: 500px;
+      padding: 16px;
+      gap: 30px;
+    }
+
+    &__title {
+      font-size: 36px;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
+
+    &__idm {
+      font-size: 16px;
+      top: 28%;
+      left: 42%;
+
+      img {
+        width: 50px;
+        height: 35px;
+      }
+    }
+
+    &__buttons {
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 260px;
+
+      button {
+        // width: 100%;
+        padding: 16px 24px;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .Poster {
+    min-height: 450px;
+
+    &__content {
+      height: 450px;
+      padding: 12px;
+      gap: 25px;
+    }
+
+    &__title {
+      font-size: 28px;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    &__idm {
+      font-size: 14px;
+      top: 26%;
+      left: 40%;
+
+      img {
+        width: 40px;
+        height: 28px;
+      }
+    }
+
+    &__buttons {
+      gap: 16px;
+      max-width: 240px;
+
+      button {
+        padding: 14px 20px;
+        font-size: 14px;
+      }
     }
   }
 }

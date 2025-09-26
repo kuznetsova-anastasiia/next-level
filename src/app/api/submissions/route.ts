@@ -57,18 +57,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid category" }, { status: 400 });
     }
 
-    // Validate YouTube link format
-    const youtubeRegex = /^https:\/\/(www\.)?youtube\.com\/watch\?v=.+/;
-    if (!youtubeRegex.test(youtubeLink)) {
-      return NextResponse.json(
-        {
-          error:
-            "Посилання має бути у форматі YouTube (https://www.youtube.com/watch?v=...)",
-        },
-        { status: 400 }
-      );
-    }
-
     // Validate song duration
     if (songMinutes < 0 || songSeconds < 0 || songSeconds >= 60) {
       return NextResponse.json(

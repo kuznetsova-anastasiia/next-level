@@ -327,16 +327,6 @@ export default function SubmissionForm() {
       return;
     }
 
-    // Validate YouTube link format
-    const youtubeRegex = /^https:\/\/(www\.)?youtube\.com\/watch\?v=.+/;
-    if (!youtubeRegex.test(formData.youtubeLink)) {
-      setError(
-        "Посилання має бути у форматі YouTube (https://www.youtube.com/watch?v=...)"
-      );
-      setLoading(false);
-      return;
-    }
-
     try {
       const response = await fetch("/api/submissions", {
         method: "POST",
@@ -601,7 +591,6 @@ export default function SubmissionForm() {
               required
               className={styles.input}
               placeholder="https://www.youtube.com/watch?v=..."
-              pattern="https://(www\.)?youtube\.com/watch\?v=.*"
               title="Введіть посилання на YouTube"
             />
           </div>

@@ -1,0 +1,229 @@
+@import "../../styles/variables";
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modalContent {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: $pink-accent;
+  color: white;
+  border: 3px solid $white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    transform: scale(1.1);
+    background: $dark-main;
+  }
+}
+
+.handwrittenNote {
+  background: #fefefe;
+  border: 3px solid #ff4081;
+  border-radius: 15px;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: rotate(-2deg);
+
+  // Torn paper effect
+  &::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: #f6edb0cd;
+    border-radius: 15px;
+    z-index: -1;
+  }
+
+  // Notebook lines
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 30px;
+    right: 0;
+    bottom: 0;
+    background-image: repeating-linear-gradient(
+      transparent,
+      transparent 24px,
+      #e0e0e0 24px,
+      #e0e0e0 25px
+    );
+    z-index: 0;
+    border-radius: 12px;
+  }
+}
+
+.noteContent {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-kalam), cursive, sans-serif;
+}
+
+.noteTitle {
+  font-size: 28px;
+  color: #ff4081;
+  margin: 0 0 20px 0;
+  text-align: center;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.noteText {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+  margin: 0 0 25px 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+.price {
+  text-align: center;
+  margin: 25px 0;
+  padding: 15px;
+  background: rgba(255, 64, 129, 0.1);
+  border-radius: 10px;
+  border: 2px dashed #ff4081;
+}
+
+.priceLabel {
+  font-size: 16px;
+  color: #333;
+  margin-right: 10px;
+}
+
+.priceValue {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff4081;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.contactButtons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 25px 0;
+  flex-wrap: wrap;
+}
+
+.contactButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #ff4081, #ff6b9d);
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(255, 64, 129, 0.3);
+  border: 2px solid transparent;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 64, 129, 0.4);
+    background: linear-gradient(135deg, #ff6b9d, #ff4081);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.instagramIcon,
+.telegramIcon {
+  font-size: 20px;
+}
+
+.signature {
+  text-align: right;
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px dashed #ff4081;
+}
+
+.signatureText {
+  font-size: 16px;
+  color: #ff4081;
+  font-style: italic;
+  font-weight: 600;
+}
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .modalContent {
+    max-width: 90%;
+  }
+
+  .handwrittenNote {
+    padding: 20px;
+  }
+
+  .noteTitle {
+    font-size: 24px;
+  }
+
+  .noteText {
+    font-size: 16px;
+  }
+
+  .contactButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contactButton {
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+  }
+}

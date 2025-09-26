@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/db";
 import { getNextSubmissionNumber } from "@/app/lib/submissionCounter";
-import { SyncService } from "@/app/lib/syncService";
 import { emailService } from "@/app/lib/emailService";
 
 export async function POST(request: NextRequest) {
@@ -102,14 +101,6 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Sync to Airtable
-    try {
-      await SyncService.syncSubmissionToAirtable(submission.id);
-    } catch (airtableError) {
-      console.error("Airtable sync failed:", airtableError);
-      // Don't fail the request if Airtable sync fails
-    }
-
     // Send confirmation email
     try {
       // Get user email for sending confirmation
@@ -169,31 +160,25 @@ export async function GET(request: NextRequest) {
 
     const submissions = await prisma.submission.findMany({
       where: { userId },
+      include: {
+        adminComments: {
+          include: {
+            admin: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
+        },
+      },
       orderBy: { createdAt: "desc" },
     });
 
-    // Get current status from Airtable for each submission
-    const submissionsWithCurrentStatus = await Promise.all(
-      submissions.map(async (submission) => {
-        if (submission.airtableId) {
-          try {
-            const currentSubmission =
-              await SyncService.getSubmissionWithCurrentStatus(submission.id);
-            return currentSubmission || submission;
-          } catch (error) {
-            console.error(
-              "Error getting current status for submission:",
-              submission.id,
-              error
-            );
-            return submission;
-          }
-        }
-        return submission;
-      })
-    );
-
-    return NextResponse.json({ submissions: submissionsWithCurrentStatus });
+    return NextResponse.json({ submissions });
   } catch (error) {
     console.error("Error fetching submissions:", error);
     return NextResponse.json(

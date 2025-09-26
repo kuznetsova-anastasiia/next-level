@@ -425,4 +425,133 @@
       text-align: left;
     }
   }
+
+  // Admin section styles
+  .adminSection {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid $border-pink;
+  }
+}
+
+// Admin comments styles (root level for proper specificity)
+.adminCommentsSection {
+  margin: 15px 0 0 0 !important;
+  padding: 12px !important;
+  background: rgba(255, 79, 216, 0.05) !important;
+  border: 1px solid rgba(255, 79, 216, 0.3) !important;
+  border-radius: 6px !important;
+
+  .detailLabel {
+    color: $pink-accent !important;
+    font-weight: 600 !important;
+    margin-bottom: 10px !important;
+    display: block !important;
+    font-size: 14px !important;
+  }
+}
+
+.adminCommentsList {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0 !important;
+}
+
+.adminComment {
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 8px 0 !important;
+  border-bottom: 1px solid rgba(255, 79, 216, 0.15) !important;
+  position: relative !important;
+  margin-bottom: 0 !important;
+
+  &:last-child {
+    border-bottom: none !important;
+  }
+}
+
+.commentHeader {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 6px !important;
+  padding-bottom: 6px !important;
+  border-bottom: 1px solid rgba(255, 79, 216, 0.1) !important;
+
+  .commentAuthor {
+    color: $pink-accent !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+  }
+
+  .commentDate {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+  }
+}
+
+.commentContent {
+  color: $white !important;
+  line-height: 1.4 !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  margin-top: 6px !important;
+}
+
+// Admin button styles (root level for proper specificity)
+.adminButton {
+  background: linear-gradient(135deg, #ff4fd8, #ff6b9d);
+  color: white;
+  border: 3px solid $border-pink;
+  padding: 12px 24px;
+  border-radius: $radius;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 79, 216, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 0 5px rgba(255, 79, 216, 0.5);
+  font-family: var(--font-press-start);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 79, 216, 0.6), 0 8px 16px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #ff6b9d, #ff4fd8);
+    border-color: #ff4fd8;
+    text-shadow: 0 0 8px rgba(255, 79, 216, 0.8);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(255, 79, 216, 0.5), 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
 }

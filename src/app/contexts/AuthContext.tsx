@@ -21,6 +21,7 @@ interface AuthContextType {
   user: User | null;
   login: (user: User) => void;
   logout: () => void;
+  refreshUser: () => Promise<void>;
   loading: boolean;
 }
 
@@ -30,12 +31,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const refreshUser = async () => {
+    if (!user) return;
+
+    try {
+      const response = await fetch(`/api/auth/me?userId=${user.id}`);
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData);
+        localStorage.setItem("user", JSON.stringify(userData));
+      }
+    } catch (error) {
+      console.error("Error refreshing user data:", error);
+    }
+  };
+
   useEffect(() => {
-    // Check if user is logged in on page load
+    // Check if user is logged in on page load and refresh data
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       try {
-        setUser(JSON.parse(storedUser));
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+
+        // Refresh user data from database to get latest role
+        fetch(`/api/auth/me?userId=${parsedUser.id}`)
+          .then((response) => (response.ok ? response.json() : null))
+          .then((userData) => {
+            if (userData) {
+              setUser(userData);
+              localStorage.setItem("user", JSON.stringify(userData));
+            }
+          })
+          .catch((error) => {
+            console.error("Error refreshing user data:", error);
+          });
       } catch (error) {
         localStorage.removeItem("user");
       }
@@ -54,7 +84,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, refreshUser, loading }}>
       {children}
     </AuthContext.Provider>
   );

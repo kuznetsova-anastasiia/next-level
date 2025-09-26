@@ -10,14 +10,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 9999;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .modalContent {
   position: relative;
   max-width: 500px;
-  width: 100%;
+  // width: 100%;
   animation: modalSlideIn 0.3s ease-out;
 }
 
@@ -200,30 +201,69 @@
 
 // Mobile responsive
 @media (max-width: 768px) {
+  .modalOverlay {
+    padding: 10px;
+    align-items: center;
+    padding-top: 50px;
+  }
+
   .modalContent {
-    max-width: 90%;
+    // max-width: 90%;
+    // width: 100%;
+    // max-height: 80vh;
+    // overflow-y: auto;
   }
 
   .handwrittenNote {
-    padding: 20px;
+    padding: 15px;
+    transform: rotate(-1deg);
+    max-width: 350px;
   }
 
   .noteTitle {
-    font-size: 24px;
+    font-size: 20px;
+    margin-bottom: 15px;
   }
 
   .noteText {
-    font-size: 16px;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .price {
+    margin: 20px 0;
+    padding: 12px;
+  }
+
+  .priceLabel {
+    font-size: 14px;
+  }
+
+  .priceValue {
+    font-size: 20px;
   }
 
   .contactButtons {
     flex-direction: column;
     align-items: center;
+    gap: 10px;
+    margin: 20px 0;
   }
 
   .contactButton {
     width: 100%;
-    max-width: 200px;
+    max-width: 180px;
     justify-content: center;
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .signature {
+    margin-top: 20px;
+    padding-top: 10px;
+  }
+
+  .signatureText {
+    font-size: 14px;
   }
 }

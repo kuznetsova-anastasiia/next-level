@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { useRouter } from "next/navigation";
 import styles from "./user.module.scss";
 
 interface Submission {
@@ -25,13 +26,27 @@ interface Submission {
   level: string | null;
   createdAt: string;
   updatedAt: string;
+  adminComments: AdminComment[];
+}
+
+interface AdminComment {
+  id: string;
+  content: string;
+  createdAt: string;
+  admin: {
+    id: string;
+    name: string;
+  };
 }
 
 export default function UserPage() {
   const { user, logout } = useAuth();
+  const router = useRouter();
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  console.log(user);
 
   const handleLogout = () => {
     logout();
@@ -122,14 +137,45 @@ export default function UserPage() {
       : baseCategory;
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("uk-UA", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+  const formatDate = (dateString: string, exact: boolean = false) => {
+    const date = new Date(dateString);
+
+    if (exact) {
+      return date.toLocaleDateString("uk-UA", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    }
+
+    const now = new Date();
+    const diffInMinutes = Math.floor(
+      (now.getTime() - date.getTime()) / (1000 * 60)
+    );
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    const diffInDays = Math.floor(diffInHours / 24);
+
+    if (diffInMinutes < 1) {
+      return "щойно";
+    } else if (diffInMinutes < 60) {
+      return `${diffInMinutes} хв. тому`;
+    } else if (diffInHours < 24) {
+      return `${diffInHours} год. тому`;
+    } else if (diffInDays === 1) {
+      return "вчора";
+    } else if (diffInDays < 7) {
+      return `${diffInDays} дн. тому`;
+    } else {
+      return date.toLocaleDateString("uk-UA", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    }
   };
 
   if (!user) {
@@ -173,6 +219,17 @@ export default function UserPage() {
               <span className={styles.value}>{user.email}</span>
             </div>
           </div>
+
+          {user.role === "admin" && (
+            <div className={styles.adminSection}>
+              <button
+                className={styles.adminButton}
+                onClick={() => router.push("/admin")}
+              >
+                🔧 Панель адміністратора
+              </button>
+            </div>
+          )}
         </div>
 
         <div className={styles.logoutSection}>
@@ -288,9 +345,38 @@ export default function UserPage() {
                   <div className={styles.detailRow}>
                     <span className={styles.detailLabel}>Дата подачі:</span>
                     <span className={styles.detailValue}>
-                      {formatDate(submission.createdAt)}
+                      {formatDate(submission.createdAt, true)}
                     </span>
                   </div>
+
+                  {submission.adminComments &&
+                    submission.adminComments.length > 0 && (
+                      <div className={styles.adminCommentsSection}>
+                        <span className={styles.detailLabel}>
+                          Коментарі адміністратора:
+                        </span>
+                        <div className={styles.adminCommentsList}>
+                          {submission.adminComments.map((comment) => (
+                            <div
+                              key={comment.id}
+                              className={styles.adminComment}
+                            >
+                              <div className={styles.commentHeader}>
+                                <span className={styles.commentAuthor}>
+                                  {comment.admin.name}
+                                </span>
+                                <span className={styles.commentDate}>
+                                  {formatDate(comment.createdAt)}
+                                </span>
+                              </div>
+                              <div className={styles.commentContent}>
+                                {comment.content}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                 </div>
               </div>
             ))}

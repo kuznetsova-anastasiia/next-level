@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/db";
 import { getNextSubmissionNumber } from "@/app/lib/submissionCounter";
 import { SyncService } from "@/app/lib/syncService";
+import { emailService } from "@/app/lib/emailService";
 
 export async function POST(request: NextRequest) {
   try {
@@ -107,6 +108,32 @@ export async function POST(request: NextRequest) {
     } catch (airtableError) {
       console.error("Airtable sync failed:", airtableError);
       // Don't fail the request if Airtable sync fails
+    }
+
+    // Send confirmation email
+    try {
+      // Get user email for sending confirmation
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { email: true, name: true },
+      });
+
+      if (user) {
+        await emailService.sendSubmissionConfirmation({
+          userEmail: user.email,
+          userName: user.name,
+          submissionNumber,
+          category,
+          songName,
+          participants: participants || [],
+        });
+        console.log(
+          `Confirmation email sent to ${user.email} for submission #${submissionNumber}`
+        );
+      }
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError);
+      // Don't fail the request if email sending fails
     }
 
     return NextResponse.json(

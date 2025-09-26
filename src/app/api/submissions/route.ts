@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     const {
       name,
       nickname,
-      phoneNumber,
+      telegramContact,
       category,
       songName,
       songMinutes,
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     if (
       !name ||
       !nickname ||
-      !phoneNumber ||
+      !telegramContact ||
       !category ||
       !songName ||
       !youtubeLink ||
@@ -41,13 +41,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate phone number format (Ukrainian format: 0971856972)
-    const phoneRegex = /^0\d{9}$/;
-    if (!phoneRegex.test(phoneNumber)) {
+    // Validate Telegram contact format (username or link)
+    const telegramRegex = /^(@\w+|https?:\/\/(t\.me\/|telegram\.me\/)\w+)$/;
+    if (!telegramRegex.test(telegramContact)) {
       return NextResponse.json(
         {
           error:
-            "Номер телефону має бути у форматі 0971856972 (10 цифр, починаючи з 0)",
+            "Введіть Telegram username (@username) або посилання (t.me/username)",
         },
         { status: 400 }
       );
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
         submissionNumber,
         name,
         nickname,
-        phoneNumber,
+        telegramContact,
         category,
         songName,
         songMinutes: parseInt(songMinutes),

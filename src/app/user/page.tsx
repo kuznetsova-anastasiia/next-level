@@ -10,7 +10,7 @@ interface Submission {
   submissionNumber: number;
   name: string;
   nickname: string;
-  phoneNumber: string;
+  telegramContact: string;
   category: string;
   songName: string;
   songMinutes: number;

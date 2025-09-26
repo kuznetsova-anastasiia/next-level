@@ -17,6 +17,13 @@
   &__logo {
     grid-column: 1;
     justify-self: start;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 120px;
+      height: 43px;
+    }
   }
 
   &__links {

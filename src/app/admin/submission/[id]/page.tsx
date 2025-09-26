@@ -27,7 +27,7 @@ interface Submission {
   submissionNumber: number;
   name: string;
   nickname: string;
-  phoneNumber: string;
+  telegramContact: string;
   category: string;
   songName: string;
   songMinutes: number;
@@ -334,8 +334,10 @@ export default function SubmissionDetailsPage() {
                 <span className={styles.value}>{submission.nickname}</span>
               </div>
               <div className={styles.detailRow}>
-                <span className={styles.label}>Телефон:</span>
-                <span className={styles.value}>{submission.phoneNumber}</span>
+                <span className={styles.label}>Telegram:</span>
+                <span className={styles.value}>
+                  {submission.telegramContact}
+                </span>
               </div>
               <div className={styles.detailRow}>
                 <span className={styles.label}>Email:</span>

@@ -12,4 +12,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .Footer__icons {
+    display: flex;
+    gap: 12px;
+  }
+
+  .telegramIcon {
+    transform: rotate(70deg);
+  }
 }

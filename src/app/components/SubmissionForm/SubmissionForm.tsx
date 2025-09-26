@@ -23,7 +23,7 @@ export default function SubmissionForm() {
   const [formData, setFormData] = useState({
     name: "",
     nickname: "",
-    phoneNumber: "",
+    telegramContact: "",
     category: "",
     songName: "",
     songMinutes: "",
@@ -234,7 +234,7 @@ export default function SubmissionForm() {
     const requiredFields = [
       "name",
       "nickname",
-      "phoneNumber",
+      "telegramContact",
       "category",
       "songName",
       "youtubeLink",
@@ -247,10 +247,12 @@ export default function SubmissionForm() {
       }
     }
 
-    // Validate phone number format (Ukrainian format: 0971856972)
-    const phoneRegex = /^0\d{9}$/;
-    if (!phoneRegex.test(formData.phoneNumber)) {
-      setError("Номер телефону має бути у форматі 0XXXXXXXXX");
+    // Validate Telegram contact format (username or link)
+    const telegramRegex = /^(@\w+|https?:\/\/(t\.me\/|telegram\.me\/)\w+)$/;
+    if (!telegramRegex.test(formData.telegramContact)) {
+      setError(
+        "Введіть Telegram username (@username) або посилання (t.me/username)"
+      );
       setLoading(false);
       return;
     }
@@ -368,7 +370,7 @@ export default function SubmissionForm() {
         setFormData({
           name: "",
           nickname: "",
-          phoneNumber: "",
+          telegramContact: "",
           category: "",
           songName: "",
           songMinutes: "",
@@ -511,18 +513,17 @@ export default function SubmissionForm() {
           </div>
 
           <div className={styles.inputGroup}>
-            <label htmlFor="phoneNumber">Телефон *</label>
+            <label htmlFor="telegramContact">Telegram *</label>
             <input
-              type="tel"
-              id="phoneNumber"
-              name="phoneNumber"
-              value={formData.phoneNumber}
+              type="text"
+              id="telegramContact"
+              name="telegramContact"
+              value={formData.telegramContact}
               onChange={handleInputChange}
               required
               className={styles.input}
-              placeholder="0XXXXXXXXX"
-              pattern="0[0-9]{9}"
-              title="Номер телефону має бути у форматі 0XXXXXXXXX"
+              placeholder="@username або t.me/username"
+              title="Введіть Telegram username (@username) або посилання (t.me/username)"
             />
           </div>
         </div>
@@ -745,7 +746,15 @@ export default function SubmissionForm() {
                 required
               />
               <span className={styles.required}>*</span>Я підтверджую, що
-              надіслав(ла) музику та відео/фото для фону (якщо потрібно) до <a href="https://t.me/idm_gang" target="_blank" rel="noopener noreferrer">Telegram акаунту</a> організаторів
+              надіслав(ла) музику та відео/фото для фону (якщо потрібно) до{" "}
+              <a
+                href="https://t.me/idm_gang"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Telegram акаунту
+              </a>{" "}
+              організаторів
             </label>
           </div>
 

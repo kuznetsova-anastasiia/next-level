@@ -55,6 +55,14 @@ export default function Navbar() {
             height={43}
             style={{ width: "120px", height: "43px" }}
           />
+          x
+          <img
+            src="/images/idm.PNG"
+            alt="IDM"
+            width={120}
+            height={43}
+            style={{ width: "120px", height: "43px" }}
+          />
         </Link>
 
         {/* Desktop Navigation */}

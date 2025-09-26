@@ -31,7 +31,7 @@ model Submission {
   submissionNumber Int
   name             String
   nickname         String
-  phoneNumber      String
+  telegramContact  String
   category         String   // solo, duo/trio, team, unformat
   songName         String
   songMinutes      Int

@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { emailService } from "@/app/lib/emailService";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     console.log("Testing email service...");
 

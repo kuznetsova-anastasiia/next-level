@@ -4,7 +4,14 @@ import { useState } from "react";
 import styles from "./email-debug.module.scss";
 
 export default function EmailDebug() {
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<{
+    success?: boolean;
+    message?: string;
+    error?: string;
+    details?: string;
+    connectionStatus?: string;
+    environmentCheck?: Record<string, string>;
+  } | null>(null);
   const [loading, setLoading] = useState(false);
 
   const testEmail = async () => {

@@ -56,7 +56,13 @@ export async function POST(request: NextRequest) {
       console.log(`Password reset email sent to ${user.email}`);
     } catch (emailError) {
       console.error("Email sending failed:", emailError);
+      console.error("Email error details:", {
+        message:
+          emailError instanceof Error ? emailError.message : "Unknown error",
+        stack: emailError instanceof Error ? emailError.stack : undefined,
+      });
       // Don't fail the request if email sending fails
+      // The user will still get a success message for security reasons
     }
 
     return NextResponse.json({

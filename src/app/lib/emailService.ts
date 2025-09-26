@@ -57,6 +57,15 @@ class EmailService {
       },
     };
 
+    // Debug logging for email configuration
+    console.log("Email Service Configuration:", {
+      host: config.host,
+      port: config.port,
+      secure: config.secure,
+      user: config.auth.user ? "***" : "NOT SET",
+      pass: config.auth.pass ? "***" : "NOT SET",
+    });
+
     this.transporter = nodemailer.createTransport(config);
   }
 
@@ -90,6 +99,13 @@ class EmailService {
       );
     } catch (error) {
       console.error("Error sending confirmation email:", error);
+      console.error("Email config check:", {
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        secure: process.env.SMTP_SECURE,
+        user: process.env.SMTP_USER ? "SET" : "NOT SET",
+        pass: process.env.SMTP_PASS ? "SET" : "NOT SET",
+      });
       throw new Error("Failed to send confirmation email");
     }
   }
@@ -177,7 +193,26 @@ class EmailService {
       console.log(`Password reset email sent to ${userEmail}`);
     } catch (error) {
       console.error("Error sending password reset email:", error);
+      console.error("Email config check:", {
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        secure: process.env.SMTP_SECURE,
+        user: process.env.SMTP_USER ? "SET" : "NOT SET",
+        pass: process.env.SMTP_PASS ? "SET" : "NOT SET",
+      });
       throw new Error("Failed to send password reset email");
+    }
+  }
+
+  // Test method to verify email configuration
+  async testEmailConnection(): Promise<boolean> {
+    try {
+      await this.transporter.verify();
+      console.log("Email service connection verified successfully");
+      return true;
+    } catch (error) {
+      console.error("Email service connection failed:", error);
+      return false;
     }
   }
 

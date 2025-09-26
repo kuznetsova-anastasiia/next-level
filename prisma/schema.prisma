@@ -40,6 +40,7 @@ model Submission {
   hasBackdancers   Boolean  @default(false)
   participants     String[] // Array of participant names
   participantSubmissionNumbers Int[] // Array of submission numbers for each participant
+  participantSubmissionsInfo String[] // Array of submissions info for each participant
   hasProps         Boolean  @default(false)
   usingBackground  Boolean  @default(false)
   comment          String?

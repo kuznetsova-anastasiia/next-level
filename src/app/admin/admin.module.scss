@@ -553,35 +553,250 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: 15px;
+    padding: 10px;
   }
 
   .header {
     flex-direction: column;
     gap: 15px;
     text-align: center;
+    margin-bottom: 20px;
 
     h1 {
-      font-size: 24px;
+      font-size: 22px;
     }
   }
 
-  .submissionsList,
+  .submissionsList {
+    padding: 12px;
+    max-height: 85vh;
+  }
+
+  .submissionsList h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .submissionsGrid {
+    gap: 12px;
+  }
+
+  .submissionCard {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .submissionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .submissionNumber {
+    font-size: 14px;
+  }
+
+  .submissionDate {
+    font-size: 11px;
+    align-self: flex-end;
+  }
+
+  .submissionInfo {
+    margin-bottom: 12px;
+
+    h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .category {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .song {
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .submissionDetails {
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+
+  .detailItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 79, 216, 0.1);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .detailLabel {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .detailValue {
+    font-size: 13px;
+    color: $white;
+    font-weight: 500;
+    word-break: break-all;
+  }
+
+  .submissionStatus {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .statusBadge,
+  .levelBadge {
+    padding: 6px 10px;
+    font-size: 11px;
+    border-radius: 10px;
+  }
+
+  .commentsIndicator {
+    margin-top: 8px;
+    font-size: 11px;
+    padding: 4px 8px;
+    background: rgba(255, 79, 216, 0.1);
+    border-radius: 6px;
+    display: inline-block;
+  }
+
   .submissionDetails {
     padding: 15px;
+    max-height: 70vh;
   }
 
   .detailRow {
     flex-direction: column;
     align-items: flex-start;
     gap: 5px;
+    padding: 10px 0;
+
+    .label {
+      font-size: 12px;
+      min-width: auto;
+    }
 
     .value {
       text-align: left;
+      font-size: 14px;
     }
   }
 
   .controls {
-    gap: 20px;
+    gap: 15px;
+  }
+
+  .controlGroup {
+    label {
+      font-size: 13px;
+    }
+
+    select {
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+  }
+
+  .participant {
+    padding: 10px;
+    border-radius: 6px;
+
+    .participantName {
+      font-size: 14px;
+    }
+
+    .submissionCount {
+      font-size: 11px;
+    }
+  }
+
+  .comment {
+    padding: 12px;
+    border-radius: 6px;
+  }
+
+  .commentHeader {
+    margin-bottom: 6px;
+
+    .commentAuthor {
+      font-size: 13px;
+    }
+
+    .commentDate {
+      font-size: 11px;
+    }
+  }
+
+  .commentContent {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .commentInput {
+    padding: 10px;
+    font-size: 14px;
+    min-height: 70px;
+  }
+
+  .addCommentButton {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 8px;
+  }
+
+  .header {
+    h1 {
+      font-size: 20px;
+    }
+  }
+
+  .submissionsList {
+    padding: 10px;
+  }
+
+  .submissionCard {
+    padding: 10px;
+  }
+
+  .submissionInfo h3 {
+    font-size: 15px;
+  }
+
+  .detailItem {
+    font-size: 11px;
+  }
+
+  .detailLabel {
+    font-size: 10px;
+  }
+
+  .detailValue {
+    font-size: 12px;
+  }
+
+  .statusBadge,
+  .levelBadge {
+    padding: 4px 8px;
+    font-size: 10px;
   }
 }

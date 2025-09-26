@@ -36,6 +36,7 @@ interface Submission {
   hasBackdancers: boolean;
   participants: string[];
   participantSubmissionNumbers: number[];
+  participantSubmissionsInfo: string[];
   hasProps: boolean;
   usingBackground: boolean;
   comment: string | null;
@@ -233,7 +234,12 @@ export default function AdminPage() {
 
                 <div className={styles.submissionInfo}>
                   <h3>{submission.name}</h3>
-                  <p className={styles.category}>{submission.category}</p>
+                  <p className={styles.category}>
+                    {submission.category === "solo" && submission.hasBackdancers
+                      ? "Solo+"
+                      : submission.category.charAt(0).toUpperCase() +
+                        submission.category.slice(1)}
+                  </p>
                   <p className={styles.song}>{submission.songName}</p>
 
                   <div className={styles.submissionDetails}>

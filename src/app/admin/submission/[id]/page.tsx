@@ -36,6 +36,7 @@ interface Submission {
   hasBackdancers: boolean;
   participants: string[];
   participantSubmissionNumbers: number[];
+  participantSubmissionsInfo: string[];
   hasProps: boolean;
   usingBackground: boolean;
   comment: string | null;
@@ -345,7 +346,12 @@ export default function SubmissionDetailsPage() {
               <h3>Деталі виступу</h3>
               <div className={styles.detailRow}>
                 <span className={styles.label}>Категорія:</span>
-                <span className={styles.value}>{submission.category}</span>
+                <span className={styles.value}>
+                  {submission.category === "solo" && submission.hasBackdancers
+                    ? "Solo+"
+                    : submission.category.charAt(0).toUpperCase() +
+                      submission.category.slice(1)}
+                </span>
               </div>
               <div className={styles.detailRow}>
                 <span className={styles.label}>Пісня:</span>
@@ -400,14 +406,21 @@ export default function SubmissionDetailsPage() {
               <div className={styles.participantsList}>
                 {submission.participants.map((participant, index) => (
                   <div key={index} className={styles.participant}>
-                    <span className={styles.participantName}>
-                      {participant}
-                    </span>
-                    {submission.participantSubmissionNumbers[index] && (
-                      <span className={styles.submissionCount}>
-                        ({submission.participantSubmissionNumbers[index]}{" "}
-                        заявок)
+                    <div className={styles.participantInfo}>
+                      <span className={styles.participantName}>
+                        {participant}
                       </span>
+                      {submission.participantSubmissionNumbers[index] && (
+                        <span className={styles.submissionCount}>
+                          ({submission.participantSubmissionNumbers[index]}{" "}
+                          заявок)
+                        </span>
+                      )}
+                    </div>
+                    {submission.participantSubmissionsInfo[index] && (
+                      <div className={styles.submissionsInfo}>
+                        {submission.participantSubmissionsInfo[index]}
+                      </div>
                     )}
                   </div>
                 ))}

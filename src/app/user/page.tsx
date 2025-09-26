@@ -19,6 +19,7 @@ interface Submission {
   hasBackdancers: boolean;
   participants: string[];
   participantSubmissionNumbers: number[];
+  participantSubmissionsInfo: string[];
   hasProps: boolean;
   usingBackground: boolean;
   comment: string | null;

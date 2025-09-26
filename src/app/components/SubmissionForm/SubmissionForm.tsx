@@ -8,6 +8,7 @@ interface Participant {
   id: string;
   name: string;
   submissionNumber: string;
+  submissionsInfo: string;
 }
 
 export default function SubmissionForm() {
@@ -30,7 +31,7 @@ export default function SubmissionForm() {
     youtubeLink: "",
     hasBackdancers: false,
     participants: [
-      { id: "1", name: "", submissionNumber: "" },
+      { id: "1", name: "", submissionNumber: "", submissionsInfo: "" },
     ] as Participant[], // Always start with one participant
     hasProps: false,
     usingBackground: false,
@@ -112,6 +113,7 @@ export default function SubmissionForm() {
               id: Date.now().toString() + index,
               name: "",
               submissionNumber: "",
+              submissionsInfo: "",
             })
           );
 
@@ -144,6 +146,7 @@ export default function SubmissionForm() {
       id: Date.now().toString(),
       name: "",
       submissionNumber: "",
+      submissionsInfo: "",
     };
     setFormData((prev) => ({
       ...prev,
@@ -194,7 +197,7 @@ export default function SubmissionForm() {
 
   const updateParticipant = (
     id: string,
-    field: "name" | "submissionNumber",
+    field: "name" | "submissionNumber" | "submissionsInfo",
     value: string
   ) => {
     setFormData((prev) => ({
@@ -343,6 +346,9 @@ export default function SubmissionForm() {
           participantSubmissionNumbers: formData.participants
             .map((p) => (p.submissionNumber ? parseInt(p.submissionNumber) : 0))
             .filter((num) => num > 0),
+          participantSubmissionsInfo: formData.participants
+            .map((p) => p.submissionsInfo.trim())
+            .filter((info) => info),
           userId: user.id,
         }),
       });
@@ -361,7 +367,9 @@ export default function SubmissionForm() {
           songSeconds: "",
           youtubeLink: "",
           hasBackdancers: false,
-          participants: [{ id: "1", name: "", submissionNumber: "" }], // Reset to one participant
+          participants: [
+            { id: "1", name: "", submissionNumber: "", submissionsInfo: "" },
+          ], // Reset to one participant
           hasProps: false,
           usingBackground: false,
           comment: "",
@@ -649,6 +657,19 @@ export default function SubmissionForm() {
                       min="0"
                       max="4"
                       title="Загальна кількість номерів учасника (максимум 4)"
+                    />
+                    <input
+                      type="text"
+                      value={participant.submissionsInfo}
+                      onChange={(e) =>
+                        updateParticipant(
+                          participant.id,
+                          "submissionsInfo",
+                          e.target.value
+                        )
+                      }
+                      placeholder="категорія - нік/назва команди"
+                      className={styles.participantSubmissionsInfoInput}
                     />
                   </div>
                 </div>

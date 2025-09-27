@@ -4,11 +4,11 @@ import { emailService } from "@/app/lib/emailService";
 
 export async function POST(request: NextRequest) {
   try {
-    const { submissionId, content } = await request.json();
+    const { submissionId, content, adminId } = await request.json();
 
-    if (!submissionId || !content) {
+    if (!submissionId || !content || !adminId) {
       return NextResponse.json(
-        { error: "Submission ID and content are required" },
+        { error: "Submission ID, content, and admin ID are required" },
         { status: 400 }
       );
     }
@@ -33,17 +33,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // For now, we'll use a hardcoded admin ID. In a real app, you'd get this from the session
-    // You should create an admin user in your database and use their ID here
-    const adminUser = await prisma.user.findFirst({
-      where: { role: "admin" },
-      select: { id: true },
+    // Verify the admin user exists
+    const adminUser = await prisma.user.findUnique({
+      where: { id: adminId },
+      select: { id: true, name: true, role: true },
     });
 
-    if (!adminUser) {
+    if (!adminUser || adminUser.role !== "admin") {
       return NextResponse.json(
-        { error: "No admin user found" },
-        { status: 500 }
+        { error: "Invalid admin user" },
+        { status: 403 }
       );
     }
 
@@ -52,7 +51,7 @@ export async function POST(request: NextRequest) {
       data: {
         content,
         submissionId,
-        adminId: adminUser.id,
+        adminId: adminId,
       },
       include: {
         admin: {
@@ -71,7 +70,7 @@ export async function POST(request: NextRequest) {
         userName: submission.user.name,
         submissionNumber: submission.submissionNumber,
         commentContent: content,
-        adminName: comment.admin.name,
+        adminName: adminUser.name,
       });
       console.log(
         `Comment notification email sent to ${submission.user.email}`

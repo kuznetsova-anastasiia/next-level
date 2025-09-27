@@ -17,10 +17,14 @@ interface Submission {
   songSeconds: number;
   youtubeLink: string;
   hasBackdancers: boolean;
+  backdancersTiming: string | null;
   participants: string[];
   participantSubmissionNumbers: number[];
   participantSubmissionsInfo: string[];
+  participantBirthDates: string[];
+  participantTelegramUsernames: string[];
   hasProps: boolean;
+  propsComment: string | null;
   usingBackground: boolean;
   materialsSent: boolean;
   comment: string | null;
@@ -125,7 +129,7 @@ export default function UserPage() {
     }
   };
 
-  const formatCategory = (category: string, hasBackdancers: boolean) => {
+  const formatCategory = (category: string) => {
     const categoryMap: { [key: string]: string } = {
       solo: "Solo",
       "duo/trio": "Duo/Trio",
@@ -133,10 +137,7 @@ export default function UserPage() {
       unformat: "Unformat",
     };
 
-    const baseCategory = categoryMap[category] || category;
-    return category === "solo" && hasBackdancers
-      ? `${baseCategory}+`
-      : baseCategory;
+    return categoryMap[category] || category;
   };
 
   const formatDate = (dateString: string, exact: boolean = false) => {
@@ -287,12 +288,16 @@ export default function UserPage() {
 
                 <div className={styles.submissionDetails}>
                   <div className={styles.detailRow}>
+                    <span className={styles.detailLabel}>Нікнейм/Назва:</span>
+                    <span className={styles.detailValue}>
+                      {submission.nickname}
+                    </span>
+                  </div>
+
+                  <div className={styles.detailRow}>
                     <span className={styles.detailLabel}>Категорія:</span>
                     <span className={styles.detailValue}>
-                      {formatCategory(
-                        submission.category,
-                        submission.hasBackdancers
-                      )}
+                      {formatCategory(submission.category)}
                     </span>
                   </div>
 

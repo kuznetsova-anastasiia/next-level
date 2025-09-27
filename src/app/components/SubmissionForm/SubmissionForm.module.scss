@@ -287,6 +287,7 @@
     display: flex;
     gap: 8px;
     align-items: center;
+    flex-wrap: wrap;
   }
 
   .participantNameInput {
@@ -335,6 +336,50 @@
   }
 
   .participantSubmissionsInfoInput {
+    flex: 1;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid $border-pink;
+    border-radius: 8px;
+    color: $white;
+    font-family: var(--font-tektur);
+    font-size: 14px;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $pink-accent;
+      box-shadow: 0 0 0 3px rgba(255, 79, 216, 0.1);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .participantBirthDateInput {
+    flex: 1;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid $border-pink;
+    border-radius: 8px;
+    color: $white;
+    font-family: var(--font-tektur);
+    font-size: 14px;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $pink-accent;
+      box-shadow: 0 0 0 3px rgba(255, 79, 216, 0.1);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .participantTelegramInput {
     flex: 1;
     padding: 12px 16px;
     background: rgba(255, 255, 255, 0.1);
@@ -472,7 +517,6 @@
   }
 
   .participantNumberInput {
-    width: 100%;
     font-size: 16px;
     padding: 14px 16px;
     min-height: 48px;
@@ -485,6 +529,18 @@
   }
 
   .participantSubmissionsInfoInput {
+    font-size: 16px;
+    padding: 14px 16px;
+    min-height: 48px;
+  }
+
+  .participantBirthDateInput {
+    font-size: 16px;
+    padding: 14px 16px;
+    min-height: 48px;
+  }
+
+  .participantTelegramInput {
     font-size: 16px;
     padding: 14px 16px;
     min-height: 48px;
@@ -537,7 +593,9 @@
 
   .participantNumberInput,
   .participantNameInput,
-  .participantSubmissionsInfoInput {
+  .participantSubmissionsInfoInput,
+  .participantBirthDateInput,
+  .participantTelegramInput {
     font-size: 16px;
     padding: 12px;
     min-height: 44px;

@@ -34,10 +34,14 @@ interface Submission {
   songSeconds: number;
   youtubeLink: string;
   hasBackdancers: boolean;
+  backdancersTiming: string | null;
   participants: string[];
   participantSubmissionNumbers: number[];
   participantSubmissionsInfo: string[];
+  participantBirthDates: string[];
+  participantTelegramUsernames: string[];
   hasProps: boolean;
+  propsComment: string | null;
   usingBackground: boolean;
   materialsSent: boolean;
   comment: string | null;
@@ -134,8 +138,8 @@ export default function SubmissionDetailsPage() {
           content: newComment,
           adminId: user.id,
         }),
-      });
-
+      }); 
+      
       const data = await response.json();
       if (response.ok) {
         setNewComment("");
@@ -326,21 +330,21 @@ export default function SubmissionDetailsPage() {
             <div className={styles.detailsSection}>
               <h3>Інформація про учасника</h3>
               <div className={styles.detailRow}>
-                <span className={styles.label}>Ім&apos;я:</span>
+                <span className={styles.label}>ПІБ куратора:</span>
                 <span className={styles.value}>{submission.name}</span>
               </div>
               <div className={styles.detailRow}>
-                <span className={styles.label}>Нікнейм:</span>
+                <span className={styles.label}>Нікнейм/Назва:</span>
                 <span className={styles.value}>{submission.nickname}</span>
               </div>
               <div className={styles.detailRow}>
-                <span className={styles.label}>Telegram:</span>
+                <span className={styles.label}>Telegram куратора:</span>
                 <span className={styles.value}>
                   {submission.telegramContact}
                 </span>
               </div>
               <div className={styles.detailRow}>
-                <span className={styles.label}>Email:</span>
+                <span className={styles.label}>Email юзера:</span>
                 <span className={styles.value}>{submission.user.email}</span>
               </div>
             </div>
@@ -350,10 +354,8 @@ export default function SubmissionDetailsPage() {
               <div className={styles.detailRow}>
                 <span className={styles.label}>Категорія:</span>
                 <span className={styles.value}>
-                  {submission.category === "solo" && submission.hasBackdancers
-                    ? "Solo+"
-                    : submission.category.charAt(0).toUpperCase() +
-                      submission.category.slice(1)}
+                  {submission.category.charAt(0).toUpperCase() +
+                    submission.category.slice(1)}
                 </span>
               </div>
               <div className={styles.detailRow}>
@@ -361,14 +363,14 @@ export default function SubmissionDetailsPage() {
                 <span className={styles.value}>{submission.songName}</span>
               </div>
               <div className={styles.detailRow}>
-                <span className={styles.label}>Тривалість:</span>
+                <span className={styles.label}>Тривалість пісні:</span>
                 <span className={styles.value}>
                   {submission.songMinutes}:
                   {submission.songSeconds.toString().padStart(2, "0")}
                 </span>
               </div>
               <div className={styles.detailRow}>
-                <span className={styles.label}>YouTube:</span>
+                <span className={styles.label}>YouTube заявка:</span>
                 <a
                   href={submission.youtubeLink}
                   target="_blank"
@@ -379,17 +381,33 @@ export default function SubmissionDetailsPage() {
                 </a>
               </div>
               <div className={styles.detailRow}>
-                <span className={styles.label}>Бекдансери:</span>
+                <span className={styles.label}>Підтанцьовка (соло):</span>
                 <span className={styles.value}>
                   {submission.hasBackdancers ? "Так" : "Ні"}
                 </span>
               </div>
+              {submission.hasBackdancers && submission.backdancersTiming && (
+                <div className={styles.detailRow}>
+                  <span className={styles.label}>Тривалість підтанцьовки:</span>
+                  <span className={styles.value}>
+                    {submission.backdancersTiming}
+                  </span>
+                </div>
+              )}
               <div className={styles.detailRow}>
                 <span className={styles.label}>Реквізит:</span>
                 <span className={styles.value}>
                   {submission.hasProps ? "Так" : "Ні"}
                 </span>
               </div>
+              {submission.hasProps && submission.propsComment && (
+                <div className={styles.detailRow}>
+                  <span className={styles.label}>Опис реквізиту:</span>
+                  <span className={styles.value}>
+                    {submission.propsComment}
+                  </span>
+                </div>
+              )}
               <div className={styles.detailRow}>
                 <span className={styles.label}>Фон:</span>
                 <span className={styles.value}>
@@ -423,6 +441,18 @@ export default function SubmissionDetailsPage() {
                     {submission.participantSubmissionsInfo[index] && (
                       <div className={styles.submissionsInfo}>
                         {submission.participantSubmissionsInfo[index]}
+                      </div>
+                    )}
+                    {submission.participantBirthDates[index] && (
+                      <div className={styles.birthDate}>
+                        Дата народження:{" "}
+                        {submission.participantBirthDates[index]}
+                      </div>
+                    )}
+                    {submission.participantTelegramUsernames[index] && (
+                      <div className={styles.telegramUsername}>
+                        Telegram:{" "}
+                        {submission.participantTelegramUsernames[index]}
                       </div>
                     )}
                   </div>

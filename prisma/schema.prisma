@@ -38,10 +38,14 @@ model Submission {
   songSeconds      Int
   youtubeLink      String   // Required YouTube link
   hasBackdancers   Boolean  @default(false)
+  backdancersTiming String? // Duration of backdancers performance (MM:SS format)
   participants     String[] // Array of participant names
   participantSubmissionNumbers Int[] // Array of submission numbers for each participant
   participantSubmissionsInfo String[] // Array of submissions info for each participant
+  participantBirthDates String[] // Array of birth dates for each participant
+  participantTelegramUsernames String[] // Array of telegram usernames for each participant
   hasProps         Boolean  @default(false)
+  propsComment     String?  // Description of props used in performance
   usingBackground  Boolean  @default(false)
   materialsSent    Boolean  @default(false)
   comment          String?

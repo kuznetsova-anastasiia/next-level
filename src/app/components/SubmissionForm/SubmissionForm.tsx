@@ -9,6 +9,8 @@ interface Participant {
   name: string;
   submissionNumber: string;
   submissionsInfo: string;
+  birthDate: string;
+  telegramUsername: string;
 }
 
 export default function SubmissionForm() {
@@ -30,10 +32,19 @@ export default function SubmissionForm() {
     songSeconds: "",
     youtubeLink: "",
     hasBackdancers: false,
+    backdancersTiming: "",
     participants: [
-      { id: "1", name: "", submissionNumber: "", submissionsInfo: "" },
+      {
+        id: "1",
+        name: "",
+        submissionNumber: "",
+        submissionsInfo: "",
+        birthDate: "",
+        telegramUsername: "",
+      },
     ] as Participant[], // Always start with one participant
     hasProps: false,
+    propsComment: "",
     usingBackground: false,
     materialsSent: false,
     comment: "",
@@ -41,6 +52,7 @@ export default function SubmissionForm() {
 
   const categories = [
     { value: "solo", label: "Solo" },
+    { value: "solo+", label: "Solo+" },
     { value: "duo/trio", label: "Duo/Trio" },
     { value: "team", label: "Team" },
     { value: "unformat", label: "Unformat" },
@@ -92,6 +104,8 @@ export default function SubmissionForm() {
               return 1;
             case "duo/trio":
               return 2;
+            case "solo+":
+              return 1;
             case "team":
               return 4;
             case "unformat":
@@ -115,6 +129,8 @@ export default function SubmissionForm() {
               name: "",
               submissionNumber: "",
               submissionsInfo: "",
+              birthDate: "",
+              telegramUsername: "",
             })
           );
 
@@ -148,6 +164,8 @@ export default function SubmissionForm() {
       name: "",
       submissionNumber: "",
       submissionsInfo: "",
+      birthDate: "",
+      telegramUsername: "",
     };
     setFormData((prev) => ({
       ...prev,
@@ -163,6 +181,8 @@ export default function SubmissionForm() {
           return 1;
         case "duo/trio":
           return 2;
+        case "solo+":
+          return 1;
         case "team":
           return 4;
         case "unformat":
@@ -198,7 +218,12 @@ export default function SubmissionForm() {
 
   const updateParticipant = (
     id: string,
-    field: "name" | "submissionNumber" | "submissionsInfo",
+    field:
+      | "name"
+      | "submissionNumber"
+      | "submissionsInfo"
+      | "birthDate"
+      | "telegramUsername",
     value: string
   ) => {
     setFormData((prev) => ({
@@ -247,16 +272,6 @@ export default function SubmissionForm() {
       }
     }
 
-    // Validate Telegram contact format (username or link)
-    const telegramRegex = /^(@\w+|https?:\/\/(t\.me\/|telegram\.me\/)\w+)$/;
-    if (!telegramRegex.test(formData.telegramContact)) {
-      setError(
-        "Введіть Telegram username (@username) або посилання (t.me/username)"
-      );
-      setLoading(false);
-      return;
-    }
-
     // Validate song duration
     const minutes = parseInt(formData.songMinutes);
     const seconds = parseInt(formData.songSeconds);
@@ -287,6 +302,8 @@ export default function SubmissionForm() {
           return 1;
         case "duo/trio":
           return 2;
+        case "solo+":
+          return 1;
         case "team":
           return 4;
         case "unformat":
@@ -301,6 +318,7 @@ export default function SubmissionForm() {
       const categoryLabels: { [key: string]: string } = {
         solo: "Solo",
         "duo/trio": "Duo/Trio",
+        "solo+": "Solo+",
         team: "Team",
         unformat: "Unformat",
       };
@@ -340,6 +358,16 @@ export default function SubmissionForm() {
       return;
     }
 
+    // Validate birth date format (dd.mm.yyyy)
+    const dateRegex = /^\d{2}\.\d{2}\.\d{4}$/;
+    for (const participant of formData.participants) {
+      if (participant.birthDate && !dateRegex.test(participant.birthDate)) {
+        setError("Дата народження повинна бути у форматі дд.мм.рррр");
+        setLoading(false);
+        return;
+      }
+    }
+
     try {
       const response = await fetch("/api/submissions", {
         method: "POST",
@@ -359,6 +387,12 @@ export default function SubmissionForm() {
           participantSubmissionsInfo: formData.participants
             .map((p) => p.submissionsInfo.trim())
             .filter((info) => info),
+          participantBirthDates: formData.participants
+            .map((p) => p.birthDate.trim())
+            .filter((date) => date),
+          participantTelegramUsernames: formData.participants
+            .map((p) => p.telegramUsername.trim())
+            .filter((username) => username),
           userId: user.id,
         }),
       });
@@ -377,10 +411,19 @@ export default function SubmissionForm() {
           songSeconds: "",
           youtubeLink: "",
           hasBackdancers: false,
+          backdancersTiming: "",
           participants: [
-            { id: "1", name: "", submissionNumber: "", submissionsInfo: "" },
+            {
+              id: "1",
+              name: "",
+              submissionNumber: "",
+              submissionsInfo: "",
+              birthDate: "",
+              telegramUsername: "",
+            },
           ], // Reset to one participant
           hasProps: false,
+          propsComment: "",
           usingBackground: false,
           materialsSent: false,
           comment: "",
@@ -486,7 +529,7 @@ export default function SubmissionForm() {
           <h2>Персональна інформація</h2>
 
           <div className={styles.inputGroup}>
-            <label htmlFor="name">Повне ім&apos;я *</label>
+            <label htmlFor="name">ПІБ куратора заявки *</label>
             <input
               type="text"
               id="name"
@@ -495,12 +538,12 @@ export default function SubmissionForm() {
               onChange={handleInputChange}
               required
               className={styles.input}
-              placeholder="Ім'я Прізвище"
+              placeholder="ПІБ"
             />
           </div>
 
           <div className={styles.inputGroup}>
-            <label htmlFor="nickname">Нік/Назва команди *</label>
+            <label htmlFor="nickname">Нік або Назва команди/дуо/тріо *</label>
             <input
               type="text"
               id="nickname"
@@ -513,7 +556,7 @@ export default function SubmissionForm() {
           </div>
 
           <div className={styles.inputGroup}>
-            <label htmlFor="telegramContact">Telegram *</label>
+            <label htmlFor="telegramContact">Telegram куратора заявки *</label>
             <input
               type="text"
               id="telegramContact"
@@ -599,7 +642,9 @@ export default function SubmissionForm() {
           </div>
 
           <div className={styles.inputGroup}>
-            <label htmlFor="youtubeLink">Посилання на YouTube *</label>
+            <label htmlFor="youtubeLink">
+              Посилання на YouTube з відео-заявкою *
+            </label>
             <input
               type="url"
               id="youtubeLink"
@@ -623,9 +668,66 @@ export default function SubmissionForm() {
                   onChange={handleInputChange}
                   className={styles.checkbox}
                 />
-                В мене присутня підтанцьовка в номері більше ніж 1хв/половину
-                номера
+                В мене присутня підтанцьовка в номері
               </label>
+            </div>
+          )}
+
+          {formData.category === "solo" && formData.hasBackdancers && (
+            <div className={styles.inputGroup}>
+              <label htmlFor="backdancersTiming">
+                Тривалість підтанцьовки у номері *
+              </label>
+              <div className={styles.durationInputs}>
+                <div className={styles.durationField}>
+                  <input
+                    type="number"
+                    name="backdancersMinutes"
+                    value={formData.backdancersTiming.split(":")[0] || ""}
+                    onChange={(e) => {
+                      const seconds =
+                        formData.backdancersTiming.split(":")[1] || "00";
+                      setFormData((prev) => ({
+                        ...prev,
+                        backdancersTiming: `${e.target.value.padStart(
+                          2,
+                          "0"
+                        )}:${seconds}`,
+                      }));
+                    }}
+                    min="0"
+                    max="59"
+                    placeholder="Хв"
+                    required
+                    className={styles.input}
+                  />
+                  <span>хвилин</span>
+                </div>
+                <div className={styles.durationField}>
+                  <input
+                    type="number"
+                    name="backdancersSeconds"
+                    value={formData.backdancersTiming.split(":")[1] || ""}
+                    onChange={(e) => {
+                      const minutes =
+                        formData.backdancersTiming.split(":")[0] || "00";
+                      setFormData((prev) => ({
+                        ...prev,
+                        backdancersTiming: `${minutes}:${e.target.value.padStart(
+                          2,
+                          "0"
+                        )}`,
+                      }));
+                    }}
+                    min="0"
+                    max="59"
+                    placeholder="Сек"
+                    required
+                    className={styles.input}
+                  />
+                  <span>секунд</span>
+                </div>
+              </div>
             </div>
           )}
 
@@ -648,8 +750,45 @@ export default function SubmissionForm() {
                           e.target.value
                         )
                       }
-                      placeholder="Ім'я Прізвище"
+                      placeholder="ПІБ"
                       className={styles.participantNameInput}
+                      required
+                    />
+                    <input
+                      type="text"
+                      value={participant.birthDate}
+                      onChange={(e) => {
+                        let value = e.target.value;
+                        // Remove any non-digit characters
+                        value = value.replace(/\D/g, "");
+                        // Format as dd.mm.yyyy
+                        if (value.length >= 2) {
+                          value =
+                            value.substring(0, 2) + "." + value.substring(2);
+                        }
+                        if (value.length >= 5) {
+                          value =
+                            value.substring(0, 5) + "." + value.substring(5, 9);
+                        }
+                        updateParticipant(participant.id, "birthDate", value);
+                      }}
+                      className={styles.participantBirthDateInput}
+                      placeholder="дд.мм.рррр"
+                      maxLength={10}
+                      required
+                    />
+                    <input
+                      type="text"
+                      value={participant.telegramUsername}
+                      onChange={(e) =>
+                        updateParticipant(
+                          participant.id,
+                          "telegramUsername",
+                          e.target.value
+                        )
+                      }
+                      className={styles.participantTelegramInput}
+                      placeholder="@username"
                       required
                     />
                     <input
@@ -667,6 +806,7 @@ export default function SubmissionForm() {
                       min="0"
                       max="4"
                       title="Загальна кількість номерів учасника (максимум 4)"
+                      required
                     />
                     <input
                       type="text"
@@ -680,6 +820,7 @@ export default function SubmissionForm() {
                       }
                       placeholder="категорія - нік/назва команди"
                       className={styles.participantSubmissionsInfoInput}
+                      required
                     />
                   </div>
                 </div>
@@ -721,6 +862,22 @@ export default function SubmissionForm() {
               В номері присутній реквізит
             </label>
           </div>
+
+          {formData.hasProps && (
+            <div className={styles.inputGroup}>
+              <label htmlFor="propsComment">Опишіть реквізит *</label>
+              <textarea
+                id="propsComment"
+                name="propsComment"
+                value={formData.propsComment}
+                onChange={handleInputChange}
+                rows={3}
+                className={styles.textarea}
+                placeholder="Детально опишіть який реквізит ви будете використовувати і як він буде прибиратися зі сцени..."
+                required
+              />
+            </div>
+          )}
 
           <div className={styles.checkboxGroup}>
             <label className={styles.checkboxLabel}>

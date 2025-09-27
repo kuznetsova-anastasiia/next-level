@@ -34,10 +34,14 @@ interface Submission {
   songSeconds: number;
   youtubeLink: string;
   hasBackdancers: boolean;
+  backdancersTiming: string | null;
   participants: string[];
   participantSubmissionNumbers: number[];
   participantSubmissionsInfo: string[];
+  participantBirthDates: string[];
+  participantTelegramUsernames: string[];
   hasProps: boolean;
+  propsComment: string | null;
   usingBackground: boolean;
   materialsSent: boolean;
   comment: string | null;
@@ -234,11 +238,9 @@ export default function AdminPage() {
                 </div>
 
                 <div className={styles.submissionInfo}>
-                  <h3>{submission.name}</h3>
+                  <h3>{submission.nickname}</h3>
                   <p className={styles.category}>
-                    {submission.category === "solo" && submission.hasBackdancers
-                      ? "Solo+"
-                      : submission.category.charAt(0).toUpperCase() +
+                    {submission.category.charAt(0).toUpperCase() +
                         submission.category.slice(1)}
                   </p>
                   <p className={styles.song}>{submission.songName}</p>

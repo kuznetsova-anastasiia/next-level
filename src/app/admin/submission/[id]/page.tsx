@@ -138,7 +138,7 @@ export default function SubmissionDetailsPage() {
           content: newComment,
           adminId: user.id,
         }),
-      }); 
+      });
 
       const data = await response.json();
       if (response.ok) {
@@ -258,6 +258,29 @@ export default function SubmissionDetailsPage() {
     }
   };
 
+  const isLink = (text: string) => {
+    return (
+      text.startsWith("http://") ||
+      text.startsWith("https://") ||
+      text.startsWith("t.me/") ||
+      text.startsWith("@")
+    );
+  };
+
+  const formatTelegramLink = (text: string) => {
+    if (!text) return text;
+
+    if (text.startsWith("@")) {
+      return `https://t.me/${text.substring(1)}`;
+    } else if (text.startsWith("t.me/")) {
+      return `https://${text}`;
+    } else if (text.startsWith("http://") || text.startsWith("https://")) {
+      return text;
+    }
+
+    return text;
+  };
+
   if (!user || user.role !== "admin") {
     return (
       <div className={styles.container}>
@@ -352,7 +375,18 @@ export default function SubmissionDetailsPage() {
               <div className={styles.detailRow}>
                 <span className={styles.label}>Telegram куратора:</span>
                 <span className={styles.value}>
-                  {submission.telegramContact}
+                  {isLink(submission.telegramContact) ? (
+                    <a
+                      href={formatTelegramLink(submission.telegramContact)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.telegramLink}
+                    >
+                      {submission.telegramContact}
+                    </a>
+                  ) : (
+                    submission.telegramContact
+                  )}
                 </span>
               </div>
               <div className={styles.detailRow}>
@@ -463,7 +497,22 @@ export default function SubmissionDetailsPage() {
                     {submission.participantTelegramUsernames[index] && (
                       <div className={styles.telegramUsername}>
                         Telegram:{" "}
-                        {submission.participantTelegramUsernames[index]}
+                        {isLink(
+                          submission.participantTelegramUsernames[index]
+                        ) ? (
+                          <a
+                            href={formatTelegramLink(
+                              submission.participantTelegramUsernames[index]
+                            )}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.telegramLink}
+                          >
+                            {submission.participantTelegramUsernames[index]}
+                          </a>
+                        ) : (
+                          submission.participantTelegramUsernames[index]
+                        )}
                       </div>
                     )}
                   </div>

@@ -424,7 +424,7 @@ class EmailService {
                     <a href="https://www.instagram.com/next.level.party.ua/" class="social-link" target="_blank">
                         📷 Instagram
                     </a>
-                    <a href="https://t.me/nextlevel_party" class="social-link" target="_blank">
+                    <a href="https://t.me/idm_gang" class="social-link" target="_blank">
                         ✈️ Telegram
                     </a>
                 </div>
@@ -660,7 +660,7 @@ class EmailService {
                     <a href="https://www.instagram.com/next.level.party.ua/" class="social-link" target="_blank">
                         📷 Instagram
                     </a>
-                    <a href="https://t.me/nextlevel_party" class="social-link" target="_blank">
+                    <a href="https://t.me/idm_gang" class="social-link" target="_blank">
                         ✈️ Telegram
                     </a>
                 </div>
@@ -739,6 +739,7 @@ class EmailService {
             .comment-header {
                 display: flex;
                 justify-content: space-between;
+                gap: 10px;
                 align-items: center;
                 margin-bottom: 15px;
                 padding-bottom: 10px;
@@ -821,7 +822,7 @@ class EmailService {
                     <a href="https://www.instagram.com/next.level.party.ua/" class="social-link" target="_blank">
                         📷 Instagram
                     </a>
-                    <a href="https://t.me/nextlevel_party" class="social-link" target="_blank">
+                    <a href="https://t.me/idm_gang" class="social-link" target="_blank">
                         ✈️ Telegram
                     </a>
                 </div>

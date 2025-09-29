@@ -22,6 +22,22 @@
     gap: 42px;
   }
 
+  &__countdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 54px;
+  }
+
+  &__buttons button {
+    font-family: var(--font-press-start);
+  }
+
   &__mapContainer {
     margin-top: 20px;
     display: flex;

@@ -1,9 +1,19 @@
 import styles from "./MainInfo.module.scss";
 import GoogleMap from "../GoogleMap";
+import Countdown from "../Countdown";
+import MainButton from "../MainButton/MainButton";
 
 export default function MainInfo() {
   return (
     <div className={styles.MainInfo}>
+      <div className={styles.MainInfo__countdown}>
+        <Countdown />
+        <div className={styles.MainInfo__buttons}>
+          <MainButton text="Гравець" color="red" type="player" />
+          <MainButton text="Глядач" color="blue" type="watcher" />
+        </div>
+      </div>
+
       <div className={`${styles.MainInfo__basicInfo} ${styles.MainInfo__part}`}>
         <div className={styles.MainInfo__info}>
           <p>Дата: 30.11.2025</p>

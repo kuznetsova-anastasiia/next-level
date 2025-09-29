@@ -1,0 +1,196 @@
+@import "../styles/variables";
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a1a 100%);
+  padding: 80px 20px 40px;
+  color: $white;
+  font-family: var(--font-tektur);
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.title {
+  font-family: var(--font-press-start);
+  font-size: 2.5rem;
+  color: $pink-accent;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 20px rgba(255, 79, 216, 0.3);
+}
+
+.sectionTitle {
+  font-family: var(--font-press-start);
+  font-size: 1.8rem;
+  color: $pink-accent;
+  margin: 2rem 0 1rem;
+  text-shadow: 0 0 10px rgba(255, 79, 216, 0.2);
+}
+
+.subsectionTitle {
+  font-size: 1.3rem;
+  color: $white;
+  margin: 1.5rem 0 0.8rem;
+  font-weight: 600;
+}
+
+.intro {
+  background: rgba(255, 79, 216, 0.1);
+  border: 2px solid $border-pink;
+  border-radius: $radius;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+
+  .introText {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.section {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $border-pink;
+  border-radius: $radius;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+
+  .sectionList {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+
+    .listItem {
+      margin-bottom: 0.5rem;
+      position: relative;
+
+      &::marker {
+        color: $pink-accent;
+      }
+    }
+  }
+
+  .sectionText {
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+
+    .strongText {
+      color: $pink-accent;
+      font-weight: 600;
+    }
+  }
+}
+
+.venue {
+  background: rgba(255, 193, 7, 0.1);
+  border: 2px solid rgba(255, 193, 7, 0.3);
+  border-radius: $radius;
+  padding: 1.5rem;
+  text-align: center;
+
+  .venueTitle {
+    color: #ffc107;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .venueAddress {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+  }
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.contactLink {
+  display: inline-block;
+  background: rgba(255, 193, 7, 0.1);
+  border: 2px solid rgba(255, 193, 7, 0.3);
+  border-radius: $radius;
+  padding: 1rem 1.5rem;
+  color: #ffc107;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: center;
+
+  &:hover {
+    background: rgba(255, 193, 7, 0.2);
+    border-color: #ffc107;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.2);
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .container {
+    padding: 60px 15px 30px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .intro {
+    padding: 1.5rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .contacts {
+    gap: 0.8rem;
+  }
+
+  .contactLink {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 50px 10px 20px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.3rem;
+  }
+
+  .intro {
+    padding: 1rem;
+  }
+
+  .section {
+    padding: 0.8rem;
+  }
+
+  .contactLink {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}

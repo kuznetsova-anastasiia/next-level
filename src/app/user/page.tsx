@@ -135,6 +135,7 @@ export default function UserPage() {
       "duo/trio": "Duo/Trio",
       team: "Team",
       unformat: "Unformat",
+      "out-of-competition": "Поза конкурсом",
     };
 
     return categoryMap[category] || category;

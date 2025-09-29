@@ -6,13 +6,23 @@ import SubmissionsCountdown from "../components/SubmissionsCountdown/Submissions
 import styles from "./submissions.module.scss";
 
 export default function Submissions() {
-  const [isRegistrationOpen, setIsRegistrationOpen] = useState(false);
+  const [registrationStatus, setRegistrationStatus] = useState<
+    "before" | "open" | "closed"
+  >("before");
 
   useEffect(() => {
     const checkRegistrationStatus = () => {
       const now = new Date();
-      const registrationDate = new Date("2025-09-01T00:00:00");
-      setIsRegistrationOpen(now >= registrationDate);
+      const registrationStartDate = new Date("2025-09-01T00:00:00");
+      const registrationEndDate = new Date("2025-10-10T23:59:59");
+
+      if (now < registrationStartDate) {
+        setRegistrationStatus("before");
+      } else if (now >= registrationStartDate && now <= registrationEndDate) {
+        setRegistrationStatus("open");
+      } else {
+        setRegistrationStatus("closed");
+      }
     };
 
     checkRegistrationStatus();
@@ -29,25 +39,55 @@ export default function Submissions() {
         <div className={styles.rules}>
           <h2>Правила подачі заявок</h2>
           <ul>
-            <li>- Подача заявок триває з 01.10.2025 по 10.11.2025</li>
+            <li>- Прийом заявок відкритий з 01.10.2025 по 10.11.2025.</li>
             <li>
-              - При подачі заявки всі обов&apos;язкові поля мають бути заповнені
+              - Людина, що подає заявку, автоматично стає її куратором. Уся
+              подальша комунікація та зміни здійснюються лише через нього.
+            </li>
+            <li>- Усі обов&apos;язкові поля заявки мають бути заповнені.</li>
+            <li>
+              - Куратор зобов&apos;язаний вказати кількість номерів усіх
+              учасників заявки.
             </li>
             <li>
-              - Результати будуть оголошені напротязі тижня з моменту закриття
-              подачі заявок
+              - Списки учасників публікуються протягом 3 днів після закриття
+              прийому заявок.
             </li>
-            <li>- Один учасник може подати до 4 заявок</li>
-            <li>- Заявка подається на кожну номінацію окремо</li>
             <li>
-              - Музика та/або фон мають бути завантажені на YouTube та посилання
-              на них має бути вказано в полі &quot;Посилання на YouTube&quot;
+              - Одна людина може брати участь не більш ніж у 4 номерах (разом із
+              позаконкурсним).
+            </li>
+            <li>- Максимальна кількість учасників у виступі — 10 осіб.</li>
+            <li>
+              - Використання спецефектів та реквізиту можливе лише за
+              погодженням з організаторами.
+            </li>
+            <li>
+              - Усі аудіо- та відеофайли потрібно подати до завершення прийому
+              заявок. Після цього внести зміни буде неможливо.
             </li>
           </ul>
+
+          <div className={styles.timings}>
+            <h3>Таймінги:</h3>
+            <ul>
+              <li>- Solo - 2:30</li>
+              <li>- Solo+ - 3:30</li>
+              <li>- Duo/Trio - 2:45</li>
+              <li>- Team - 4:00</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      {!isRegistrationOpen ? <SubmissionsCountdown /> : <SubmissionForm />}
+      {registrationStatus === "before" && <SubmissionsCountdown />}
+      {registrationStatus === "open" && <SubmissionForm />}
+      {registrationStatus === "closed" && (
+        <div className={styles.closedMessage}>
+          <h2>Реєстрація закрита</h2>
+          <p>Прийом заявок завершено. Дякуємо за участь!</p>
+        </div>
+      )}
     </div>
   );
 }

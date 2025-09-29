@@ -1,0 +1,165 @@
+@import "../styles/variables";
+
+.container {
+  min-height: 100vh;
+  background: $dark-main;
+  color: $white;
+  padding: 80px 20px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  max-width: 800px;
+  width: 100%;
+}
+
+.title {
+  font-family: var(--font-press-start);
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: $pink-accent;
+  text-shadow: 0 0 20px rgba(255, 79, 216, 0.5);
+}
+
+.section {
+  margin-bottom: 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 79, 216, 0.2);
+  border-radius: $radius;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+.sectionTitle {
+  font-family: var(--font-tektur);
+  font-size: 1.8rem;
+  color: $pink-accent;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(255, 79, 216, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+.rule {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.ruleNumber {
+  font-family: var(--font-tektur);
+  font-weight: 600;
+  color: $pink-accent;
+  background: rgba(255, 79, 216, 0.1);
+  border: 1px solid rgba(255, 79, 216, 0.3);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.ruleText {
+  font-family: var(--font-tektur);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  flex: 1;
+
+  strong {
+    color: $pink-accent;
+    font-weight: 600;
+  }
+}
+
+.contactLink {
+  color: #ffc107;
+  text-decoration: none;
+  font-weight: 600;
+  background: rgba(255, 193, 7, 0.1);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  border-radius: 4px;
+  padding: 2px 6px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 193, 7, 0.2);
+    border-color: #ffc107;
+    transform: translateY(-1px);
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .container {
+    padding: 60px 15px 30px;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .section {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .rule {
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .ruleNumber {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.8rem;
+  }
+
+  .ruleText {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 50px 10px 20px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.3rem;
+  }
+
+  .rule {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .ruleNumber {
+    align-self: flex-start;
+  }
+}

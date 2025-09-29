@@ -56,6 +56,7 @@ export default function SubmissionForm() {
     { value: "duo/trio", label: "Duo/Trio" },
     { value: "team", label: "Team" },
     { value: "unformat", label: "Unformat" },
+    { value: "out-of-competition", label: "Поза конкурсом" },
   ];
 
   // Fetch user's current submission count
@@ -108,6 +109,8 @@ export default function SubmissionForm() {
               return 1;
             case "team":
               return 4;
+            case "out-of-competition":
+              return 1;
             case "unformat":
               return 1;
             default:
@@ -185,6 +188,8 @@ export default function SubmissionForm() {
           return 1;
         case "team":
           return 4;
+        case "out-of-competition":
+          return 1;
         case "unformat":
           return 1;
         default:
@@ -200,6 +205,7 @@ export default function SubmissionForm() {
         solo: "Solo",
         "duo/trio": "Duo/Trio",
         team: "Team",
+        "out-of-competition": "Поза конкурсом",
         unformat: "Unformat",
       };
       setError(
@@ -306,6 +312,8 @@ export default function SubmissionForm() {
           return 1;
         case "team":
           return 4;
+        case "out-of-competition":
+          return 1;
         case "unformat":
           return 1;
         default:
@@ -320,6 +328,7 @@ export default function SubmissionForm() {
         "duo/trio": "Duo/Trio",
         "solo+": "Solo+",
         team: "Team",
+        "out-of-competition": "Поза конкурсом",
         unformat: "Unformat",
       };
       setError(

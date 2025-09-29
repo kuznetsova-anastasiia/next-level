@@ -67,7 +67,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <div className={styles.Navbar__links}>
-          <Link className={styles.Navbar__link} href="/about">
+          <Link className={styles.Navbar__link} href="/info">
             Інфо
           </Link>
           <Link className={styles.Navbar__link} href="/submissions">
@@ -131,7 +131,7 @@ export default function Navbar() {
         <div className={styles.Navbar__mobileLinks}>
           <Link
             className={styles.Navbar__mobileLink}
-            href="/about"
+            href="/info"
             onClick={toggleMobileMenu}
           >
             Інфо

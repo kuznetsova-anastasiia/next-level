@@ -139,7 +139,7 @@ export default function SubmissionDetailsPage() {
           adminId: user.id,
         }),
       }); 
-      
+
       const data = await response.json();
       if (response.ok) {
         setNewComment("");
@@ -203,6 +203,18 @@ export default function SubmissionDetailsPage() {
       default:
         return styles.levelNotSet;
     }
+  };
+
+  const formatCategory = (category: string) => {
+    const categoryMap: { [key: string]: string } = {
+      solo: "Solo",
+      "duo/trio": "Duo/Trio",
+      team: "Team",
+      unformat: "Unformat",
+      "out-of-competition": "Поза конкурсом",
+    };
+
+    return categoryMap[category] || category;
   };
 
   const formatDate = (dateString: string, exact: boolean = false) => {
@@ -354,8 +366,7 @@ export default function SubmissionDetailsPage() {
               <div className={styles.detailRow}>
                 <span className={styles.label}>Категорія:</span>
                 <span className={styles.value}>
-                  {submission.category.charAt(0).toUpperCase() +
-                    submission.category.slice(1)}
+                  {formatCategory(submission.category)}
                 </span>
               </div>
               <div className={styles.detailRow}>

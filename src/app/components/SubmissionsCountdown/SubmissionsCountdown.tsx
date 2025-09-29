@@ -10,12 +10,35 @@ export default function SubmissionsCountdown() {
     minutes: 0,
     seconds: 0,
   });
+  const [countdownType, setCountdownType] = useState<"opening" | "closing">(
+    "opening"
+  );
 
   useEffect(() => {
-    const targetDate = new Date("2025-10-01T00:00:00").getTime();
+    const openingDate = new Date("2025-09-01T00:00:00").getTime();
+    const closingDate = new Date("2025-10-10T23:59:59").getTime();
 
     const timer = setInterval(() => {
       const now = new Date().getTime();
+
+      let targetDate: number;
+      let type: "opening" | "closing";
+
+      if (now < openingDate) {
+        // Before opening - countdown to opening
+        targetDate = openingDate;
+        type = "opening";
+      } else if (now >= openingDate && now <= closingDate) {
+        // Between opening and closing - countdown to closing
+        targetDate = closingDate;
+        type = "closing";
+      } else {
+        // After closing - no countdown needed
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setCountdownType("closing");
+        return;
+      }
+
       const difference = targetDate - now;
 
       if (difference > 0) {
@@ -29,17 +52,27 @@ export default function SubmissionsCountdown() {
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
         setTimeLeft({ days, hours, minutes, seconds });
+        setCountdownType(type);
       } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setCountdownType(type);
       }
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
 
+  const getTitle = () => {
+    if (countdownType === "opening") {
+      return "Реєстрація відкриється через:";
+    } else {
+      return "Реєстрація закриється через:";
+    }
+  };
+
   return (
     <div className={styles.countdown}>
-      <h2>Реєстрація відкриється через:</h2>
+      <h2>{getTitle()}</h2>
       <div className={styles.timer}>
         <div className={styles.timeUnit}>
           <span className={styles.value}>{timeLeft.days}</span>

@@ -134,6 +134,19 @@ export default function AdminPage() {
     }
   };
 
+  const formatCategory = (category: string) => {
+    const categoryMap: { [key: string]: string } = {
+      solo: "Solo",
+      "duo/trio": "Duo/Trio",
+      team: "Team",
+      unformat: "Unformat",
+      "out-of-competition": "Поза конкурсом",
+    };
+
+    return categoryMap[category] || category;
+  };
+
+
   const formatDate = (dateString: string, exact: boolean = false) => {
     const date = new Date(dateString);
 
@@ -240,8 +253,7 @@ export default function AdminPage() {
                 <div className={styles.submissionInfo}>
                   <h3>{submission.nickname}</h3>
                   <p className={styles.category}>
-                    {submission.category.charAt(0).toUpperCase() +
-                        submission.category.slice(1)}
+                    {formatCategory(submission.category)}
                   </p>
                   <p className={styles.song}>{submission.songName}</p>
 

@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate category
-    const validCategories = ["solo", "duo/trio", "team", "unformat", "out-of-competition"];
+    const validCategories = ["solo", "solo+", "duo/trio", "team", "unformat", "out-of-competition"];
     if (!validCategories.includes(category)) {
       return NextResponse.json({ error: "Invalid category" }, { status: 400 });
     }

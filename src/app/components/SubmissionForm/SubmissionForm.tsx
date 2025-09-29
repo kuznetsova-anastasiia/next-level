@@ -860,7 +860,7 @@ export default function SubmissionForm() {
                           e.target.value
                         )
                       }
-                      placeholder="категорія - нік/назва команди"
+                      placeholder="Список номерів"
                       className={styles.participantSubmissionsInfoInput}
                       required
                     />

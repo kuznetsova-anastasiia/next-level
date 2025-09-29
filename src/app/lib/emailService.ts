@@ -739,7 +739,6 @@ class EmailService {
             .comment-header {
                 display: flex;
                 justify-content: space-between;
-                gap: 10px;
                 align-items: center;
                 margin-bottom: 15px;
                 padding-bottom: 10px;
@@ -748,6 +747,7 @@ class EmailService {
             .comment-author {
                 color: #ff4081;
                 font-weight: bold;
+                margin-right: 10px;
             }
             .comment-content {
                 background: white;

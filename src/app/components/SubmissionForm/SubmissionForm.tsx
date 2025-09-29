@@ -97,6 +97,34 @@ export default function SubmissionForm() {
         [name]: checked,
       }));
     } else {
+      // Handle curator fields - auto-fill first participant
+      if (name === "name" || name === "telegramContact") {
+        setFormData((prev) => {
+          const updatedFormData = {
+            ...prev,
+            [name]: value,
+          };
+
+          // Auto-fill first participant with curator's info
+          if (prev.participants.length > 0) {
+            updatedFormData.participants = prev.participants.map(
+              (participant, index) => {
+                if (index === 0) {
+                  if (name === "name") {
+                    return { ...participant, name: value };
+                  } else if (name === "telegramContact") {
+                    return { ...participant, telegramUsername: value };
+                  }
+                }
+                return participant;
+              }
+            );
+          }
+
+          return updatedFormData;
+        });
+        return;
+      }
       // Handle category change - adjust participants to meet minimum requirements
       if (name === "category") {
         const getMinParticipants = (category: string) => {
@@ -747,6 +775,11 @@ export default function SubmissionForm() {
                 <div className={styles.participantInfo}>
                   <span className={styles.participantNumber}>
                     Учасник {index + 1}
+                    {index === 0 && (
+                      <span className={styles.autoSyncNote}>
+                        (автоматично синхронізується з куратором)
+                      </span>
+                    )}
                   </span>
                   <div className={styles.participantInputs}>
                     <input

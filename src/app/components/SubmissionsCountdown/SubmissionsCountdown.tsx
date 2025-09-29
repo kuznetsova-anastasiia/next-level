@@ -15,7 +15,7 @@ export default function SubmissionsCountdown() {
   );
 
   useEffect(() => {
-    const openingDate = new Date("2025-09-01T00:00:00").getTime();
+    const openingDate = new Date("2025-10-01T00:00:00").getTime();
     const closingDate = new Date("2025-10-10T23:59:59").getTime();
 
     const timer = setInterval(() => {

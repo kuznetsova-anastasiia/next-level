@@ -13,7 +13,7 @@ export default function Submissions() {
   useEffect(() => {
     const checkRegistrationStatus = () => {
       const now = new Date();
-      const registrationStartDate = new Date("2025-09-01T00:00:00");
+      const registrationStartDate = new Date("2025-10-01T00:00:00");
       const registrationEndDate = new Date("2025-10-10T23:59:59");
 
       if (now < registrationStartDate) {

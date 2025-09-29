@@ -7,6 +7,7 @@ export default function MainInfo() {
   return (
     <div className={styles.MainInfo}>
       <div className={styles.MainInfo__countdown}>
+        <h2 className={styles.MainInfo__countdownTitle}>До паті залишилось:</h2>
         <Countdown />
         <div className={styles.MainInfo__buttons}>
           <MainButton text="Гравець" color="red" type="player" />

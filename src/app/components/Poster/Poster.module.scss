@@ -113,9 +113,11 @@
     padding: 8px;
 
     &__content {
-      height: 500px;
+      height: 550px;
       padding: 16px;
       gap: 30px;
+      background-image: url("/images/mobile.PNG");
+      background-position: center;
     }
 
     &__title {

@@ -29,6 +29,12 @@
     justify-content: center;
   }
 
+  &__countdownTitle {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
   &__buttons {
     display: flex;
     gap: 54px;
@@ -135,6 +141,19 @@
 
     &__part {
       min-height: 200px;
+    }
+
+    &__countdownTitle {
+      font-size: 18px;
+    }
+
+    &__buttons {
+      flex-direction: column;
+      gap: 20px;
+
+      button {
+        font-size: 16px;
+      }
     }
 
     &__info {

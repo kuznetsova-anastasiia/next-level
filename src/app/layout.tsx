@@ -10,18 +10,24 @@ const pressStart = Press_Start_2P({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-press-start",
+  display: "swap",
+  preload: true,
 });
 
 const tektur = Tektur({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-tektur",
+  display: "swap",
+  preload: true,
 });
 
 const kalam = Kalam({
   subsets: ["latin"],
   weight: ["300", "400", "700"],
   variable: "--font-kalam",
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

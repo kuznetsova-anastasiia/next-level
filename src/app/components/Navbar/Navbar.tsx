@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import styles from "./Navbar.module.scss";
 import { AvatarIcon } from "../Icons";
@@ -48,20 +49,20 @@ export default function Navbar() {
 
       <div className={styles.Navbar__container}>
         <Link href="/" className={styles.Navbar__logo}>
-          <img
+          <Image
             src="/images/logo.png"
             alt="NextLevel"
             width={120}
             height={43}
-            style={{ width: "120px", height: "43px" }}
+            priority
           />
           x
-          <img
+          <Image
             src="/images/idm.PNG"
             alt="IDM"
             width={120}
             height={43}
-            style={{ width: "120px", height: "43px" }}
+            priority
           />
         </Link>
 

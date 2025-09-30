@@ -1,0 +1,10 @@
+# Modern browsers that support ES6+ natively
+# This eliminates the need for polyfills shown in the warning
+
+>0.2%
+not dead
+not op_mini all
+chrome >= 90
+firefox >= 88
+safari >= 14
+edge >= 90

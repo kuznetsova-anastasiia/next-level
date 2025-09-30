@@ -426,11 +426,13 @@
     }
   }
 
-  // Admin section styles
+  // Admin section styles - Optimized for performance
   .adminSection {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 2px solid $border-pink;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 60px;
   }
 }
 
@@ -499,55 +501,34 @@
   margin-top: 6px !important;
 }
 
-// Admin button styles (root level for proper specificity)
+// Admin button styles (root level for proper specificity) - Optimized for LCP
 .adminButton {
-  background: linear-gradient(135deg, #ff4fd8, #ff6b9d);
+  background: $pink-accent;
   color: white;
-  border: 3px solid $border-pink;
+  border: 2px solid $border-pink;
   padding: 12px 24px;
   border-radius: $radius;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(255, 79, 216, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-shadow: 0 0 5px rgba(255, 79, 216, 0.5);
   font-family: var(--font-press-start);
   text-transform: uppercase;
   letter-spacing: 1px;
   position: relative;
-  overflow: hidden;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-    transition: left 0.5s ease;
-  }
+  // Performance optimizations
+  contain: layout style paint;
 
+  // Use will-change only on hover to prevent initial render cost
   &:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 79, 216, 0.6), 0 8px 16px rgba(0, 0, 0, 0.3);
-    background: linear-gradient(135deg, #ff6b9d, #ff4fd8);
-    border-color: #ff4fd8;
-    text-shadow: 0 0 8px rgba(255, 79, 216, 0.8);
-
-    &::before {
-      left: 100%;
-    }
+    will-change: transform, box-shadow;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 79, 216, 0.4);
+    background: darken($pink-accent, 5%);
   }
 
   &:active {
-    transform: translateY(-1px) scale(1.02);
+    transform: translateY(0);
   }
 
   &:focus {

@@ -1,6 +1,11 @@
 {
   "buildCommand": "npm run build",
   "installCommand": "npm install --include=dev",
+  "git": {
+    "deploymentEnabled": {
+      "dev": true
+    }
+  },
   "functions": {
     "src/app/api/**/*.ts": {
       "maxDuration": 30

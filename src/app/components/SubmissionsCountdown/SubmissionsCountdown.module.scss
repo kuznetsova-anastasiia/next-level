@@ -75,29 +75,68 @@
     margin-bottom: 30px;
 
     h2 {
-      font-size: 20px;
+      font-size: 18px;
       margin-bottom: 20px;
+      line-height: 1.4;
+      padding: 0 10px;
     }
   }
 
   .timer {
-    gap: 15px;
+    gap: 12px;
   }
 
   .timeUnit {
-    padding: 12px 16px;
-    min-width: 75px;
+    padding: 10px 14px;
+    min-width: 70px;
   }
 
   .value {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .label {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .separator {
-    font-size: 28px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown {
+    padding: 16px 12px;
+    margin-bottom: 24px;
+
+    h2 {
+      font-size: 14px;
+      margin-bottom: 16px;
+      line-height: 1.5;
+      padding: 0 8px;
+    }
+  }
+
+  .timer {
+    gap: 8px;
+  }
+
+  .timeUnit {
+    padding: 8px 10px;
+    min-width: 60px;
+  }
+
+  .value {
+    font-size: 22px;
+  }
+
+  .label {
+    font-size: 9px;
+    margin-top: 4px;
+  }
+
+  .separator {
+    font-size: 22px;
+    display: none; // Hide separators on very small screens
   }
 }

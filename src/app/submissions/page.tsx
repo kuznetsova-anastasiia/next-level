@@ -66,6 +66,22 @@ export default function Submissions() {
               - Усі аудіо- та відеофайли потрібно подати до завершення прийому
               заявок. Після цього внести зміни буде неможливо.
             </li>
+            <li>
+              - Усі файли для виступу (аудіо, відео-файли для екрану) повинні
+              бути надіслані у телеграм{" "}
+              <a
+                href="https://t.me/idm_gang"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: "#ffc107",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                }}
+              >
+                @idm_gang
+              </a>
+            </li>
           </ul>
 
           <div className={styles.timings}>

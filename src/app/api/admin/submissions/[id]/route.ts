@@ -58,7 +58,7 @@ export async function PUT(
 ) {
   try {
     const { id: submissionId } = await params;
-    const { status, level, adminId } = await request.json();
+    const { status, level } = await request.json();
 
     // Get the current submission to track changes
     const currentSubmission = await prisma.submission.findUnique({

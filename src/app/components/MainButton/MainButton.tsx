@@ -7,11 +7,10 @@ import ViewerModal from "../ViewerModal/ViewerModal";
 
 type MainButtonProps = {
   text: string;
-  color?: string;
   type?: "player" | "watcher";
 };
 
-export default function MainButton({ text, color, type }: MainButtonProps) {
+export default function MainButton({ text, type }: MainButtonProps) {
   const router = useRouter();
   const { user } = useAuth();
   const [isViewerModalOpen, setIsViewerModalOpen] = useState(false);

@@ -3,9 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./login.module.scss";
-import Stars from "../components/Stars";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function Login() {

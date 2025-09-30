@@ -10,8 +10,8 @@ export default function MainInfo() {
         <h2 className={styles.MainInfo__countdownTitle}>До паті залишилось:</h2>
         <Countdown />
         <div className={styles.MainInfo__buttons}>
-          <MainButton text="Гравець" color="red" type="player" />
-          <MainButton text="Глядач" color="blue" type="watcher" />
+          <MainButton text="Гравець" type="player" />
+          <MainButton text="Глядач" type="watcher" />
         </div>
       </div>
 

@@ -290,7 +290,7 @@
       border: 3.5px solid $border-pink;
       border-bottom: none;
       border-radius: $radius $radius 0 0;
-      padding: 20px 24px;
+      padding: 20px 24px 30px 24px;
       z-index: 1000;
       transform: translateY(100%);
       opacity: 0;
@@ -341,7 +341,7 @@
     }
 
     &__mobileMenu {
-      padding: 16px 20px;
+      padding: 16px 20px 30px 20px;
     }
 
     &__mobileLink {

@@ -113,11 +113,11 @@
     padding: 8px;
 
     &__content {
-      height: 550px;
+      height: 750px;
       padding: 16px;
       gap: 30px;
       background-image: url("/images/mobile.PNG");
-      background-position: center;
+      background-position: top;
     }
 
     &__title {
@@ -163,6 +163,7 @@
       height: 450px;
       padding: 12px;
       gap: 25px;
+      background-position: center;
     }
 
     &__title {

@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import prisma from "@/app/lib/db";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Get all submissions with user and admin comments
     const submissions = await prisma.submission.findMany({
